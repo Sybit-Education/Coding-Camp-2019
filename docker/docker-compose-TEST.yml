@@ -1,0 +1,42 @@
+version: '3.2'
+
+services:
+  coding-camp-2019-test-db:
+    image: 1000kit/h2
+    container_name: coding-camp-2019-test-db
+    restart: always
+    networks:
+      - coding-camp-2019-test
+    ports:
+      - "9091:8181"
+      - "1521:1521"
+    volumes:
+      - "h2-data:/opt/h2-data"
+
+  coding-camp-2019-test-app:
+    image: master-mind
+    container_name: coding-camp-2019-test-app
+    restart: always
+    ports:
+      - "9090:8080"
+    depends_on:
+      - coding-camp-2019-test-db
+    networks:
+      - coding-camp-2019-test
+    volumes:
+      - "log:/app/log/"
+    environment:
+      spring.profiles.active: test
+      TZ: Europe/Berlin
+
+networks:
+  coding-camp-2019-test:
+    external: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.11.254/16
+
+volumes:
+  h2-data:
+  log:
