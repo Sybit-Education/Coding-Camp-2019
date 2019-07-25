@@ -1,0 +1,13 @@
+# Production Profile
+spring:
+  profiles:
+    active: test
+  application:
+    name: Master Mind
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:~/mastermind
+    username: root
+    password: ""
+logging:
+  file: log/master-mind.log

@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: development, default
+  application:
+    name: Master Mind - DEV
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:master-mind
+    username: sa
+    password: ""
+
+  devtools:
+    restart:
+      additional-paths: src
+      exclude: "**/*.log"
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+logging:
+  file: log/master-mind.log
+
+server:
+  compression:
+    enabled: false

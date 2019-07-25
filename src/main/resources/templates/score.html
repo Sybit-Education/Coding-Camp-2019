@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="include/dependencies :: dependencies">
+</head>
+<body>
+    <div th:replace="include/navigationbar :: navigationbar"></div>
+    <div class="score_main">
+        <h1 class="score_highscore" th:text="${currentGameScore}"></h1>
+        <h3 class="score_subheading">Dein Punktestand</h3>
+        <div th:if="${!error}" class="score_win_loose" th:classappend="${playState.name() == 'WON'} ? score_win : score_loose " th:text="${playState.name() == 'WON'} ? 'Du hast gewonnen!' : 'Du hast verloren!'"></div>
+        <div th:if="${error}" class="score_win_loose score_error">Es ist ein Fehler aufgetreten</div>
+        <a class="score_restart" href="/restart"> Neustart</a>
+    </div>
+    <div th:replace="include/footer :: footer"></div>
+</body>
+</html>

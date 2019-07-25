@@ -1,0 +1,9 @@
+<body xmlns:th="http://www.w3.org/1999/xhtml">
+
+<form action="#" th:action="@{/game/attempt}" th:object="${pinPlacement}" method="post">
+    <select th:each="color : ${pinPlacement.colors}">
+        <option th:value="${color.key}" th:text="${color.value}"/>
+    </select>
+</form>
+</body>
+

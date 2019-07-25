@@ -11,8 +11,8 @@
   <groupId>de.sybit</groupId>
   <artifactId>coding-camp-2019</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>coding-camp-2019</name>
-  <description>Master Mind</description>
+  <name>Master Mind</name>
+  <description>Master Mind - Coding Camp 2019</description>
 
   <properties>
     <java.version>1.8</java.version>
@@ -56,7 +56,7 @@
       <groupId>org.jacoco</groupId>
       <artifactId>org.jacoco.agent</artifactId>
       <classifier>runtime</classifier>
-      <version>0.7.5.201505241946</version>
+      <version>0.8.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -70,7 +70,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.9</version>
+        <version>0.8.1</version>
         <configuration>
           <rules>
             <rule>
@@ -108,6 +108,14 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <showDeprecation>true</showDeprecation>
+        </configuration>
       </plugin>
     </plugins>
   </build>
