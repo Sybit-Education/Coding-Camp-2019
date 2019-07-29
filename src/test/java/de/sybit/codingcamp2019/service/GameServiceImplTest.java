@@ -1,6 +1,8 @@
 package de.sybit.codingcamp2019.service;
 
+import de.sybit.codingcamp2019.exception.GameNotFoundException;
 import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.GameStateEnum;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.User;
 import de.sybit.codingcamp2019.repository.GameRepository;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,6 +44,9 @@ public class GameServiceImplTest {
    @InjectMocks
    private GameServiceImpl gameService;
 
+   @Mock
+   private PinPlacement pinPlacement;
+
    @Before
    public void initMocks() {
       MockitoAnnotations.initMocks(this);
@@ -48,7 +54,7 @@ public class GameServiceImplTest {
 
    @Ignore
    @Test
-   public void checkForExistingGame_Create() {
+   public void checkExistingGameForSession_gameDoesNotExistsInSession_createNewGame() {
       Game game = gameService.checkExistingGameForSession(session);
       Assert.assertNotNull(game.getPinSolution());
       verify(session).setAttribute(eq(SessionKeys.SESSION_GAME.toString()), any(Game.class));
@@ -56,10 +62,10 @@ public class GameServiceImplTest {
 
    @Ignore
    @Test
-   public void checkForExistingGame_Existing() {
+   public void checkForExistingGame_gameExistsInSession() {
       game.setAttemptCount(1);
       when((Game) session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
-      Assert.assertEquals(game.getAttemptCount(), gameService.checkExistingGameForSession(session).getAttemptCount());
+      assertEquals(game.getAttemptCount(), gameService.checkExistingGameForSession(session).getAttemptCount());
    }
 
    @Ignore
@@ -91,7 +97,7 @@ public class GameServiceImplTest {
       List<Game> gameList = getGameList(2);
 
       when(gameRepository.findByUser(user)).thenReturn(gameList);
-      Assert.assertEquals(2, gameService.getAllGamesOfUser(user).size());
+      assertEquals(2, gameService.getAllGamesOfUser(user).size());
 
    }
 
@@ -101,6 +107,34 @@ public class GameServiceImplTest {
       gameService.restartGame(session);
 
       verify(session).removeAttribute(SessionKeys.SESSION_GAME.toString());
+   }
+
+   @Test
+   public void getCurrentGameOf_gameFound_returnGame() throws GameNotFoundException {
+      when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
+
+      Game currentGame = gameService.getCurrentGameOf(session);
+
+      assertEquals(game, currentGame);
+   }
+
+   @Test(expected = GameNotFoundException.class)
+   public void getCurrentGameOf_gameNotFound_throwException() throws GameNotFoundException {
+      when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(null);
+
+      Game currentGame = gameService.getCurrentGameOf(session);
+
+      assertNull(currentGame);
+   }
+
+   @Test
+   public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
+      when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
+      when(game.getAttemptCount()).thenReturn(9);
+
+      gameService.checkGameStatus(session, pinPlacement);
+
+      verify(game).setStatus(GameStateEnum.LOOSE);
    }
 
    private List<Game> getGameList(int count) {
