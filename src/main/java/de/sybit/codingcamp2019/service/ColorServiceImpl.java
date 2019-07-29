@@ -20,7 +20,7 @@ public class ColorServiceImpl implements ColorService {
       List<String> resultColorList = new ArrayList<>();
 
       //TODO
-      
+
       LOGGER.debug("<-- getAmountOfRandomColor amount={}", amount);
       return resultColorList;
    }
@@ -32,10 +32,10 @@ public class ColorServiceImpl implements ColorService {
     */
    private String getRandomHexColor() {
       LOGGER.debug("--> getRandomHexColor");
-      
+
       //TODO
       String randomColor = null;
-      
+
       LOGGER.debug("<-- getRandomHexColor: color = {}", randomColor);
       return randomColor;
    }
@@ -43,11 +43,11 @@ public class ColorServiceImpl implements ColorService {
    @Override
    public List<ColorSelectionObject> getAllPossibleColorsForPicker() {
       LOGGER.debug("--> getAllPossibleColorsForPicker");
-      
+
       List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
 
       //TODO
-      
+
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;
    }
@@ -62,7 +62,7 @@ public class ColorServiceImpl implements ColorService {
       List<String> colorList = new ArrayList<>();
       colorList.add("#ff0000"); //red
       colorList.add("#ffff00"); //yellow
-      colorList.add("#0000ff"); //blue
+      colorList.add("#1212e3"); //blue
       colorList.add("#00ff00"); //green
       colorList.add("#fda50f"); //orange
       colorList.add("#b51783"); //lila
