@@ -18,9 +18,7 @@ public class PinPlacement {
       colors.put(3, defaultColor);
    }
 
-   public Game getGame() {
-      return game;
-   }
+   public Game getGame(){ return game; }
 
    public void setGame(Game game) {
       this.game = game;
@@ -33,4 +31,8 @@ public class PinPlacement {
    public void setColors(Map<Integer, String> colors) {
       this.colors = colors;
    }
+
+
 }
+
+

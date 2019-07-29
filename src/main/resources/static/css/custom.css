@@ -8,3 +8,15 @@ body {
 	background-color: hsl(0, 0%, 96%);
 	margin-top: 60px;
 }
+
+.submitButton {
+
+    margin-top: 90%;
+    margin-bottom: 10%;
+    margin-left: 90%;
+    margin-right: 10%;
+    border-radius: 100%;
+
+
+}
+
