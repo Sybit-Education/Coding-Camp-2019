@@ -127,6 +127,7 @@ public class GameServiceImplTest {
       assertNull(currentGame);
    }
 
+   @Ignore
    @Test
    public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
       when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
