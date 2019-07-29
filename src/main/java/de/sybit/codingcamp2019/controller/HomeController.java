@@ -20,15 +20,16 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-  
 
+   @Autowired
+   private ColorService colorService;
    @Autowired
    private GameService gameService;
 
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
-
+   model.addAttribute("allpossiblecolors", colorService.getAllPossibleColorsForPicker());
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -36,7 +37,7 @@ public class HomeController {
    @PostMapping(value = "/")
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
-     
+
       modelAndView.setViewName("index");
       LOGGER.debug("<-- attempt");
       return modelAndView;
