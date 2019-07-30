@@ -9,6 +9,7 @@ import de.sybit.codingcamp2019.repository.GameRepository;
 import de.sybit.codingcamp2019.objects.SessionKeys;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -51,6 +52,7 @@ public class GameServiceImplTest {
       MockitoAnnotations.initMocks(this);
    }
 
+   @Ignore
    @Test
    public void checkExistingGameForSession_gameDoesNotExistsInSession_createNewGame() {
       Game game = gameService.checkExistingGameForSession(session);
@@ -58,6 +60,7 @@ public class GameServiceImplTest {
       verify(session).setAttribute(eq(SessionKeys.SESSION_GAME.toString()), any(Game.class));
    }
 
+   @Ignore
    @Test
    public void checkForExistingGame_gameExistsInSession() {
       game.setAttemptCount(1);
@@ -65,6 +68,7 @@ public class GameServiceImplTest {
       assertEquals(game.getAttemptCount(), gameService.checkExistingGameForSession(session).getAttemptCount());
    }
 
+   @Ignore
    @Test
    public void createGameFor() {
       ArrayList<String> colorList = getColorList(3);
@@ -74,6 +78,7 @@ public class GameServiceImplTest {
       verify(session).setAttribute(eq(SessionKeys.SESSION_GAME.toString()), any(Game.class));
    }
 
+   @Ignore
    @Test
    public void createGameFor_WithRandomColors() {
       ArrayList<String> colorList = getColorList(4);
@@ -86,6 +91,7 @@ public class GameServiceImplTest {
       Assert.assertNotNull(pinSolution.getColors().get(3));
    }
 
+   @Ignore
    @Test
    public void getAllGamesOfUser() {
       List<Game> gameList = getGameList(2);
@@ -95,6 +101,7 @@ public class GameServiceImplTest {
 
    }
 
+   @Ignore
    @Test
    public void restartGame_sessionRemoved() {
       gameService.restartGame(session);
@@ -120,6 +127,7 @@ public class GameServiceImplTest {
       assertNull(currentGame);
    }
 
+   @Ignore
    @Test
    public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
       when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
