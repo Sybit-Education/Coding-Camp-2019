@@ -29,7 +29,7 @@ public class HomeController {
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
-   model.addAttribute("allpossiblecolors", colorService.getAllPossibleColorsForPicker());
+   model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       LOGGER.debug("<-- newGame");
       return "index";
    }
