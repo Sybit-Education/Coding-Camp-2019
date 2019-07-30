@@ -5,13 +5,47 @@
 </head>
 <body>
 
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
-<main class="container">
+<main class="container wrapper">
+    <div class="lösung-container">
+        <div th:each="i: ${#numbers.sequence(0, 3)}">
+            <div class="lösung"><p class="p-lösung">?</p></div>
+        </div>
+    </div>
+    <div class="play-ground">
+
+
+
+
+
+        <div th:each="i: ${#numbers.sequence(0, 11)}">
+            <div class="field-row" id="'row' + ${i}">
+                <div class="color-box">
+
+                </div>
+                <div class="feedback-box">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="color-select">
+        <div th:each="i: ${#numbers.sequence(0, 3)}">
+                <div class="selected-color" id="'selected-color' + ${i}"></div>
+        </div>
+        <div class="ok-btn-container">
+            <button class="btn btn-primary ok-btn">OK</button>
+        </div>
+    </div>
 
 </main>
 
 <div th:replace="include/footer :: footer"></div>
+
+
 
 </body>
 </html>
