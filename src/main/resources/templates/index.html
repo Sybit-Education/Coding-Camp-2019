@@ -8,10 +8,55 @@
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container">
-    <button type="Button" class=" btn btn-primary btn-lg">1</button>
-    <button type="Button" class=" btn btn-primary btn-lg">2</button>
-    <button type="Button" class=" btn btn-primary btn-lg">3</button>
-    <button type="Button" class=" btn btn-primary btn-lg">4</button>
+    <div class="colordropdown">
+    <select id="colorselector0">
+        <option value="0" data-color="#ff0000" selected="selected">red</option>
+        <option value="1" data-color="#ffff00" >yellow</option>
+        <option value="2" data-color="#b51783">blue</option>
+        <option value="3" data-color="#00ff00">green</option>
+        <option value="4" data-color="#fda50f">orange</option>
+        <option value="5" data-color="#1212e3">purple</option>
+        <option value="6" data-color="#000000">black</option>
+        <option value="7" data-color="#00ffff">cyan</option>
+    </select>
+        <select id="colorselector1">
+            <option value="0" data-color="#ff0000" selected="selected">red</option>
+            <option value="1" data-color="#ffff00" >yellow</option>
+            <option value="2" data-color="#b51783">blue</option>
+            <option value="3" data-color="#00ff00">green</option>
+            <option value="4" data-color="#fda50f">orange</option>
+            <option value="5" data-color="#1212e3">purple</option>
+            <option value="6" data-color="#000000">black</option>
+            <option value="7" data-color="#00ffff">cyan</option>
+        </select>
+        <select id="colorselector2">
+            <option value="0" data-color="#ff0000" selected="selected">red</option>
+            <option value="1" data-color="#ffff00" >yellow</option>
+            <option value="2" data-color="#b51783">blue</option>
+            <option value="3" data-color="#00ff00">green</option>
+            <option value="4" data-color="#fda50f">orange</option>
+            <option value="5" data-color="#1212e3">purple</option>
+            <option value="6" data-color="#000000">black</option>
+            <option value="7" data-color="#00ffff">cyan</option>
+        </select>
+        <select id="colorselector3">
+            <option value="0" data-color="#ff0000" selected="selected">red</option>
+            <option value="1" data-color="#ffff00" >yellow</option>
+            <option value="2" data-color="#b51783">blue</option>
+            <option value="3" data-color="#00ff00">green</option>
+            <option value="4" data-color="#fda50f">orange</option>
+            <option value="5" data-color="#1212e3">purple</option>
+            <option value="6" data-color="#000000">black</option>
+            <option value="7" data-color="#00ffff">cyan</option>
+        </select>
+    </div>
+    <script>
+    $('#colorselector0').colorselector();
+    $('#colorselector1').colorselector();
+    $('#colorselector2').colorselector();
+    $('#colorselector3').colorselector();
+
+</script>
 
 </main>
 
