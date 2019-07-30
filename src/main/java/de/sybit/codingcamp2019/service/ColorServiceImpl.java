@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,17 +19,29 @@ public class ColorServiceImpl implements ColorService {
    public List<String> getAmountOfRandomColor(int amount) {
       LOGGER.debug("--> getAmountOfRandomColor amount={}", amount);
       List<String> resultColorList = new ArrayList<>();
-      for (int i = 0; i <= amount; i++) {
+
+      while (resultColorList.size() < amount) {
          String randomHexColor = getRandomHexColor();
-        if (resultColorList.contains(randomHexColor)) {
-
-           resultColorList.add(randomHexColor);
-        }
+         if (!checkforDoubles(resultColorList, randomHexColor)) {
+            resultColorList.add(randomHexColor);
+         }
       }
-      //TODO
-
       LOGGER.debug("<-- getAmountOfRandomColor amount={}", amount);
       return resultColorList;
+   }
+
+   @Override
+   public boolean checkforDoubles(List<String> resultColorList, String randomHexColor) {
+      int vorgekommen = 0;
+      for (String color : resultColorList) {
+         if (color.equals(randomHexColor)) {
+            vorgekommen++;
+         }
+      }
+      if (vorgekommen < 2) {
+         return false;
+      }
+      return true;
    }
 
    /**
@@ -36,12 +49,11 @@ public class ColorServiceImpl implements ColorService {
     *
     * @return
     */
-   private String getRandomHexColor() {
+   public String getRandomHexColor() {
       LOGGER.debug("--> getRandomHexColor");
       List<String> allPossibleColors = getAllPossibleColors();
       Random random = new Random();
       int zufallszahl = random.nextInt(allPossibleColors.size());
-      //TODO
       String randomColor = getAllPossibleColors().get(zufallszahl);
 
       LOGGER.debug("<-- getRandomHexColor: color = {}", randomColor);
@@ -54,7 +66,6 @@ public class ColorServiceImpl implements ColorService {
 
       List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
       List<String> Farbenliste = getAllPossibleColors();
-      //TODO
 
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;
