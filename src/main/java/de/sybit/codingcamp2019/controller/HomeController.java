@@ -22,16 +22,13 @@ public class HomeController {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
-@Autowired
-   private ColorService colorService;
-
    @Autowired
    private GameService gameService;
 
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
-      session.setAttribute("reside", colorService.getAmountOfRandomColor(4));
+      gameService.checkExistingGameForSession(session);
       LOGGER.debug("<-- newGame");
       return "index";
    }
