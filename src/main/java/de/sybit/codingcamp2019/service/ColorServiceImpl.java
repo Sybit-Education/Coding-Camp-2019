@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,10 +20,28 @@ public class ColorServiceImpl implements ColorService {
       LOGGER.debug("--> getAmountOfRandomColor amount={}", amount);
       List<String> resultColorList = new ArrayList<>();
 
-      //TODO
-      
+      while (resultColorList.size() < amount) {
+         String randomHexColor = getRandomHexColor();
+         if (!checkforDoubles(resultColorList, randomHexColor)) {
+            resultColorList.add(randomHexColor);
+         }
+      }
       LOGGER.debug("<-- getAmountOfRandomColor amount={}", amount);
       return resultColorList;
+   }
+
+   @Override
+   public boolean checkforDoubles(List<String> resultColorList, String randomHexColor) {
+      int vorgekommen = 0;
+      for (String color : resultColorList) {
+         if (color.equals(randomHexColor)) {
+            vorgekommen++;
+         }
+      }
+      if (vorgekommen < 2) {
+         return false;
+      }
+      return true;
    }
 
    /**
@@ -30,12 +49,14 @@ public class ColorServiceImpl implements ColorService {
     *
     * @return
     */
-   private String getRandomHexColor() {
+   @Override
+   public String getRandomHexColor() {
       LOGGER.debug("--> getRandomHexColor");
-      
-      //TODO
-      String randomColor = null;
-      
+      List<String> allPossibleColors = getAllPossibleColors();
+      Random random = new Random();
+      int zufallszahl = random.nextInt(allPossibleColors.size());
+      String randomColor = allPossibleColors.get(zufallszahl);
+
       LOGGER.debug("<-- getRandomHexColor: color = {}", randomColor);
       return randomColor;
    }
@@ -43,11 +64,10 @@ public class ColorServiceImpl implements ColorService {
    @Override
    public List<ColorSelectionObject> getAllPossibleColorsForPicker() {
       LOGGER.debug("--> getAllPossibleColorsForPicker");
-      
-      List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
 
-      //TODO
-      
+      List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
+      List<String> farbenliste = getAllPossibleColors();
+
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;
    }
@@ -62,13 +82,15 @@ public class ColorServiceImpl implements ColorService {
       List<String> colorList = new ArrayList<>();
       colorList.add("#ff0000"); //red
       colorList.add("#ffff00"); //yellow
-      colorList.add("#0000ff"); //blue
+      colorList.add("#1212e3"); //blue
       colorList.add("#00ff00"); //green
       colorList.add("#fda50f"); //orange
-      colorList.add("#ff00ff"); //lila
-      colorList.add("#000000"); //black
+      colorList.add("#b51783"); //sybit-lila
+      colorList.add("#356917"); //darkgreen
       colorList.add("#00ffff"); //cyan
       LOGGER.debug("<-- getAllPossibleColors");
       return colorList;
    }
 }
+
+
