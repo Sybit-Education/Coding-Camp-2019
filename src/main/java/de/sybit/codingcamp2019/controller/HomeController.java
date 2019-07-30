@@ -31,6 +31,8 @@ public class HomeController {
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
       gameService.checkExistingGameForSession(session);
+      PinPlacement pinPlacement = new PinPlacement();
+      model.addAttribute(pinPlacement);
       model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       LOGGER.debug("<-- newGame");
       return "index";

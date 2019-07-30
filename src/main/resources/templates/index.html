@@ -27,25 +27,26 @@
         </div>
     </div>
 
-    <div class="color-select">
-        <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <table><tr class="row"><td></td>
-            <div class="color-select" id="'color-select' + ${i}">
-                <select class="colorSelector">
-                    <option th:each="c: ${getAllPossibleColors}"th:value="{c.colorHex}" th:attr="data-color=${c.colorHex}">
-
-                    </option>
-
-                </select>
-
-            </div>
-            </tr>
+    <form action="#" th:object="${pinPlacement}" method="post">
+        <div id="selection" class="color-select row justify-content-center fixed-bottom">
+            <table class="col-4">
+                <tr class="row">
+                    <th:block th:each="entry, entryStat: *{colors}">
+                        <td class="field-selection field col" th:id="${i}">
+                            <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
+                                <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
+                                        th:attr="data-color=${color.colorHex}"></option>
+                            </select>
+                        </td>
+                    </th:block>
+                </tr>
             </table>
+            <div class="ok-btn-container">
+                <button class="btn btn-primary ok-btn">OK</button>
+            </div>
         </div>
-        <div class="ok-btn-container">
-            <button class="btn btn-primary ok-btn">OK</button>
-        </div>
-    </div>
+    </form>
+
 </main>
     <div th:replace="include/footer :: footer"></div>
     <script>
@@ -53,7 +54,7 @@
     var color=$(this).find(':selected').attr('data-color');
     $(this).parent().closest('option').css('background', color);
     $(this).parent().closest('option').data("value",color);
-    }
+    });
 
         </script>
 </body>
