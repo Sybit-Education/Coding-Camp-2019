@@ -41,9 +41,43 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary submitButton" disabled>OK</button>
+    <div class="table">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+    </table>
+    </div>
 
+    <div class="colordropdown">
 
+    <select id="colorselector">
+        <option value="1" data-color="#0275d8">blue</option>
+        <option value="2" data-color="#5cb85c" selected="selected">green</option>
+        <option value="3" data-color="#5bc0de">lightblue</option>
+        <option value="4" data-color="#f0ad4e">orange</option>
+        <option value="5" data-color="#d9534f">red</option>
+        <option value="6" data-color="#292b2c">black</option>
+        <option value="7" data-color="#F1C40F">yellow</option>
+        <option value="8" data-color="#8E44AD">violet</option>
+    </select>
+
+    <script>
+    $('#colorselector').colorselector();
+</script>
+
+        </div>
+
+    <div class="col-4">
+        <button type="button" class="btn btn-primary submitButton" >OK</button>
+
+    </div>
 
 </main>
 

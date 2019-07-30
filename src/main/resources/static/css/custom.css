@@ -55,15 +55,18 @@ body {
 	grid-template-columns: repeat(5, 1fr);
 }
 
-.submitButton {
+.table {
 
-    margin-top: 90%;
-    margin-bottom: 10%;
-    margin-left: 90%;
-    margin-right: 10%;
-    border-radius: 100%;
+    margin top:  30%;
 
 
+}
+
+.colordropdown {
+
+    margin-top: 50%;
+    height: 150px;
+    width: 150px
 }
 
 .selected-color {
