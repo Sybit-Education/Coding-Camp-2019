@@ -1,5 +1,6 @@
 package de.sybit.codingcamp2019.controller;
 
+import de.sybit.codingcamp2019.objects.Game;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.GameService;
@@ -20,7 +21,9 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-  
+
+@Autowired
+   private ColorService colorService;
 
    @Autowired
    private GameService gameService;
@@ -28,7 +31,7 @@ public class HomeController {
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
-
+      session.setAttribute("reside", colorService.getAmountOfRandomColor(4));
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -36,7 +39,7 @@ public class HomeController {
    @PostMapping(value = "/")
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
-     
+
       modelAndView.setViewName("index");
       LOGGER.debug("<-- attempt");
       return modelAndView;
