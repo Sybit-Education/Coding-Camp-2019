@@ -26,7 +26,7 @@ public class ScoreController {
    private GameService gameService;
 
 
-   @GetMapping("/mastermind/highscore")
+   @GetMapping("/highscore")
    public String getCurrentGameScore(Model model, HttpSession httpSession) {
       LOGGER.debug("--> getCurrentGameScore");
       
