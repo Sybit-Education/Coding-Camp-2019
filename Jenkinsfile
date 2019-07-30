@@ -98,7 +98,7 @@ pipeline {
 
     stage('Deploy Production') {
         when {
-            branch 'develop' //TODO: switch back to master!
+            branch 'master'
         }
         steps {
             echo 'Deploy master on PROD-Server ...'
