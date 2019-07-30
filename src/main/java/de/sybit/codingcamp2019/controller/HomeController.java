@@ -1,5 +1,6 @@
 package de.sybit.codingcamp2019.controller;
 
+import de.sybit.codingcamp2019.objects.Game;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.GameService;
@@ -29,7 +30,8 @@ public class HomeController {
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
-   model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
+      gameService.checkExistingGameForSession(session);
+      model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -42,7 +44,6 @@ public class HomeController {
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
-
 
 
    @GetMapping("/restart")

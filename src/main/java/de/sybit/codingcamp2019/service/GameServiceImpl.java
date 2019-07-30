@@ -35,10 +35,13 @@ public class GameServiceImpl implements GameService {
    @Override
    public Game checkExistingGameForSession(HttpSession session) {
       LOGGER.debug("--> checkExistingGameForSession");
-      Game game = null;
-      
-      //TODO
-      
+      Game game;
+
+      try {
+         game = getCurrentGameOf(session);
+      } catch (GameNotFoundException e) {
+         game = createGameFor(session);
+      }
       LOGGER.debug("<-- checkExistingGameForSession");
       return game;
    }
@@ -67,9 +70,10 @@ public class GameServiceImpl implements GameService {
    public Game createGameFor(@NotNull final HttpSession session) {
       LOGGER.debug("--> createGameFor");
       final Game newGame = new Game();
-      
+
       // TODO
-      
+      session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
+
       LOGGER.debug("<-- createGameFor");
       return newGame;
    }
@@ -78,9 +82,9 @@ public class GameServiceImpl implements GameService {
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
       Game game = null;
-      
+
 //TODO
-      
+
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
    }
@@ -88,8 +92,8 @@ public class GameServiceImpl implements GameService {
    @Override
    public void restartGame(HttpSession session) {
       LOGGER.debug("--> restartGame");
-     
-      //TODO 
+
+      //TODO
       LOGGER.debug("<-- restartGame");
    }
 
