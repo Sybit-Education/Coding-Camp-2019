@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AboutController {
    private static final Logger LOGGER = LoggerFactory.getLogger(AboutController.class);
 
-   @GetMapping(value = "/about-us")
+   @GetMapping(value = "/mastermind/about-us")
    public String showAbout() {
       LOGGER.debug("--> showAbout");
 
