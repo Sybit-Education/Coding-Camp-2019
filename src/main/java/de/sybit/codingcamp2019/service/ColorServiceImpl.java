@@ -67,7 +67,10 @@ public class ColorServiceImpl implements ColorService {
 
       List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
       List<String> farbenliste = getAllPossibleColors();
-
+   for(int i=0;i<farbenliste.size();i++){
+   String currentColor=farbenliste.get(i);
+   colorSelectionObjects.add(new ColorSelectionObject(currentColor,i));
+}
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;
    }
