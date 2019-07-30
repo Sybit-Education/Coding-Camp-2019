@@ -84,8 +84,8 @@ public class ColorServiceImpl implements ColorService {
       colorList.add("#1212e3"); //blue
       colorList.add("#00ff00"); //green
       colorList.add("#fda50f"); //orange
-      colorList.add("#b51783"); //lila
-      colorList.add("#356917"); //black
+      colorList.add("#b51783"); //sybit-lila
+      colorList.add("#356917"); //darkgreen
       colorList.add("#00ffff"); //cyan
       LOGGER.debug("<-- getAllPossibleColors");
       return colorList;
