@@ -37,7 +37,6 @@ public class GameServiceImpl implements GameService {
       LOGGER.debug("--> checkExistingGameForSession");
       Game game;
 
-      //TODO
       try {
          game = getCurrentGameOf(session);
       } catch (GameNotFoundException e) {

@@ -49,12 +49,13 @@ public class ColorServiceImpl implements ColorService {
     *
     * @return
     */
+   @Override
    public String getRandomHexColor() {
       LOGGER.debug("--> getRandomHexColor");
       List<String> allPossibleColors = getAllPossibleColors();
       Random random = new Random();
       int zufallszahl = random.nextInt(allPossibleColors.size());
-      String randomColor = getAllPossibleColors().get(zufallszahl);
+      String randomColor = allPossibleColors.get(zufallszahl);
 
       LOGGER.debug("<-- getRandomHexColor: color = {}", randomColor);
       return randomColor;
@@ -65,7 +66,7 @@ public class ColorServiceImpl implements ColorService {
       LOGGER.debug("--> getAllPossibleColorsForPicker");
 
       List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
-      List<String> Farbenliste = getAllPossibleColors();
+      List<String> farbenliste = getAllPossibleColors();
 
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;

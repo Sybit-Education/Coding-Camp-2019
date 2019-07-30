@@ -16,6 +16,7 @@ public interface ColorService {
 
    boolean checkforDoubles(List<String> resultColorList, String randomHexColor);
 
+   String getRandomHexColor();
    /**
     * Get all possible colors for color picker
     *
