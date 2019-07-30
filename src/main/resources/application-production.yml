@@ -14,4 +14,4 @@ logging:
 
 server:
   servlet:
-    contextPath: /mastermind
+    context-path: /mastermind
