@@ -14,7 +14,7 @@ folgender Abschnitt eingefügt werden:
       proxy_set_header   X-Forwarded-Port   $server_port;
       proxy_set_header   X-Forwarded-Prefix /mastermind;
 
-      proxy_pass http://127.0.0.1:8282/;
+      proxy_pass http://127.0.0.1:8282/mastermind;
 
       rewrite ^([^.]*[^/])$ $1/ permanent;
 
