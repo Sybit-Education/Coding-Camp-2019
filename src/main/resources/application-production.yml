@@ -11,3 +11,7 @@ spring:
     password: ""
 logging:
   file: log/master-mind.log
+
+server:
+  servlet:
+    contextPath: /mastermind
