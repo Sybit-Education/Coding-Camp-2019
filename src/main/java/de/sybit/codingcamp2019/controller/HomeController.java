@@ -50,7 +50,7 @@ public class HomeController {
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
       addColorPosition(pinPlacement, responseObject);
       modelAndView.setViewName("index");
-      modelAndView.addObject("lastPinPlacement", pinPlacement);
+      modelAndView.addObject("lastPinPlacement", rowObjectList);
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
