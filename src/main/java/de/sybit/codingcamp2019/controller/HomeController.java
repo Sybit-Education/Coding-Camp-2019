@@ -25,9 +25,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-   @Autowired
    private List<RowObject> rowObjectList = new ArrayList<>();
-
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
