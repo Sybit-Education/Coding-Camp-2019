@@ -27,12 +27,14 @@
                         <div class="color-pin"></div>
                     </div>
                 </div>
-                <div class="feedback-box">
-                    <div class="feedback-pin pin-white"></div>
-                    <div class="feedback-pin pin"></div>
-
-
-
+                <div class="feedback-container" th:id="'feedback-container-' +${i}">
+                    <div th:each="feedbackObject: ${feedback}">
+                        <div th:each="feedback: ${feedbackObject.getFeedback()}">
+                            <p>Farbe: <span th:text="${feedback.value[1]}"></span></p>
+                            <p>Position: <span th:text="${feedback.value[0]}"></span></p>
+                            <div th:object></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,6 +54,25 @@
 <div th:replace="include/footer :: footer"></div>
 
 
+<script th:inline=""javascript>
 
+    function createFbPins(row) {
+        var fbObject = /*[[${feedbackObject}]]*/;
+        var correctColors =  3;
+        var correctPositions = 1;
+
+        let FbContainer = document.getElementById(`feedback-container-${row}`);
+        for(let i = 0; i< correctColors; i++) {
+            let pin = document.createElement('div');
+            FbContainer.appendChild(pin);
+            pin.classList.add('feedback-pin');
+            if(correctPositions > i) {
+                pin.classList.add('pin-red');
+            }
+
+        }
+    }
+    createFbPins(1);
+</script>
 </body>
 </html>

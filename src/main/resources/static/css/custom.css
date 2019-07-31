@@ -75,7 +75,7 @@ body {
 
 }
 
-.feedback-box {
+.feedback-container {
 	grid-column: 2;
 	background-color: rgba(255,255,255,0.5);
 	display: grid;
@@ -89,7 +89,7 @@ body {
 	width: 25px;
 	height: 25px;
 	margin: 7.5px auto;
-	background-color: red;
+	background-color: white;
 	opacity: 1;
 }
 
@@ -113,8 +113,8 @@ body {
 	grid-row: 2;
 }
 
-.pin-white {
-	background-color: white;
+.pin-red {
+	background-color: red;
 }
 
 .feedback-pin-white:nth-child(1) {
