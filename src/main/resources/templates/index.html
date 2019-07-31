@@ -27,12 +27,12 @@
         </div>
     </div>
 
-    <form action="#" th:object="${pinPlacement}" method="post">
-        <div id="selection" class="color-select row justify-content-center fixed-bottom">
-            <table class="col-4">
+    <form action="#" th:object="${pinPlacement}" method="post" >
+        <div id="selection" class="color-select row justify-content-center fixed-bottom ">
+            <table class="col-6">
                 <tr class="row">
                     <th:block th:each="entry, entryStat: *{colors}">
-                        <td class="field-selection field col" th:id="${i}">
+                        <td class="field-selection field col " th:id="${i}">
                             <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
                                 <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
                                         th:attr="data-color=${color.colorHex}"></option>
@@ -52,8 +52,8 @@
     <script>
     $('.colorSelector').colorselector().on('change',function() {
     var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('option').css('background', color);
-    $(this).parent().closest('option').data("value",color);
+    $(this).parent().closest('td').css('background', color);
+    $(this).parent().closest('td').data("value",color);
     });
 
         </script>
