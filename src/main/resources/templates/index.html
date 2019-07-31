@@ -18,7 +18,7 @@
     <table>
         <th:block>
             <tr th:each="colorObject:${lastPinPlacement}">
-                <td th:each="j: ${#numbers.sequence(0, 3)}" th:bgcolor="${colorObject.getColorPos()[__${j}__]">
+                <td th:each="j: ${#numbers.sequence(0, 3)}" th:bgcolor="${colorObject.getColorPos()[__${j}__]}">
 
                 </td>
             </tr>
