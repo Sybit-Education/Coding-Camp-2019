@@ -5,6 +5,7 @@ import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.ResponseObject;
 import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.service.ColorService;
+import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,9 @@ public class HomeController {
    @Autowired
    private GameService gameService;
 
+   @Autowired
+   private FeedbackService feedbackService;
+
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
@@ -44,7 +48,8 @@ public class HomeController {
    @PostMapping(value = "/")
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
-
+      ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
+      addColorPosition(pinPlacement, responseObject);
       modelAndView.setViewName("index");
       LOGGER.debug("<-- attempt");
       return modelAndView;
