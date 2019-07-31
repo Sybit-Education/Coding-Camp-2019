@@ -13,5 +13,7 @@ logging:
   file: log/master-mind.log
 
 server:
+  compression:
+    enabled: true
   servlet:
     context-path: /mastermind

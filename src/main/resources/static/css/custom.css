@@ -46,7 +46,8 @@ body {
 .play-ground {
 	grid-row: 2;
 	overflow-y: scroll;
-	border-bottom: 5px solid black;
+	border-bottom: 2px solid black;
+	margin-bottom:45px;
 }
 
 .field-row {
@@ -73,11 +74,10 @@ body {
 .color-select{
 	grid-row: 3;
 	height: 80px;
-	border-top: 5px solid black;
-	display: grid;
 	grid-template-columns: repeat(5, 1fr);
+	margin-bottom:50px;
+	margin-right:13%;
 }
-
 
 .selected-color {
 	height: 80%;
@@ -108,9 +108,9 @@ body {
 }
 
 .ok-btn {
-	width: 80%;
-	height: 80%;
-	margin: 10% ;
+	width: 120%;
+	height: 56%;
+	margin-left:180%;
 }
 
 .lösung-container {
@@ -144,6 +144,14 @@ body {
 	line-height: 50px;
 	text-align: center;
 }
+.field{
+    display:block;
+    width:50px;
+    height:50px;
+}
 
-
+.pageHeading{
+	margin-top: 70px;
+	color: white;
+}
 
