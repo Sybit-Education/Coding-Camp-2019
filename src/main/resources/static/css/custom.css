@@ -1,5 +1,5 @@
 body {
-	height: calc(100vh - 60px);
+	height: calc(100vh);
 	margin: 0;
 	background-size: cover;
 	width: 100%;
@@ -52,6 +52,7 @@ body {
 
 .field-row {
 	width: 90%;
+	height: 80px;
 	margin: 0 5% 5% 5%;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
@@ -138,19 +139,19 @@ body {
 }
 
 .color-select{
+	height: 140px;
+	margin-bottom: 30px;
 	grid-row: 3;
-	height: 80px;
-	margin-bottom: 40px;
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
 }
 
-
 .selected-color {
-	height: 80%;
-	width: 80%;
-	margin: 10%;
-	background-color: rgba(255,255,255,0.5);
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
+	grid-row: 1;
 }
 
 #selected-color:nth-child(1){
@@ -169,14 +170,29 @@ body {
 	grid-column: 4;
 }
 
+.btn-colorselector {
+	width: 50px !important;
+	height: 50px !important;
+	margin: 0 auto !important;
+	border: 2px  solid #c3c3c3 !important;
+	border-radius: 100% !important;
+}
+
+.dropdown-menu{
+	background-color: #c3c3c3  !important;
+}
+
 .ok-btn-container {
-	grid-column: 5;
+	grid-row: 2;
+	grid-column: 1 / 5;
 }
 
 .ok-btn {
-	width: 80%;
-	height: 80%;
-	margin: 10% ;
+	width: 75%;
+	height: 60%;
+	margin: 12.5% 10%;
+	border-radius: 20px 20px 20px 20px;
+
 }
 
 .lösung-container {
@@ -214,6 +230,11 @@ body {
 	margin-top: 10px;
 	line-height: 50px;
 	text-align: center;
+}
+.field{
+    display:block;
+    width:50px;
+    height:50px;
 }
 
 .pageHeading{

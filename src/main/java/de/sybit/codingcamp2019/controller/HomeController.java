@@ -3,6 +3,7 @@ package de.sybit.codingcamp2019.controller;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.ResponseObject;
 import de.sybit.codingcamp2019.objects.RowObject;
+import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class HomeController {
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
    @Autowired
+   private ColorService colorService;
+
+   @Autowired
    private GameService gameService;
 
    @Autowired
@@ -37,6 +41,9 @@ public class HomeController {
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
       gameService.checkExistingGameForSession(session);
+      PinPlacement pinPlacement = new PinPlacement();
+      model.addAttribute(pinPlacement);
+      model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       clearAttempts();
       LOGGER.debug("<-- newGame");
       return "index";
