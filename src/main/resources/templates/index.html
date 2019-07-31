@@ -22,14 +22,16 @@
 
         <div th:each="i: ${#numbers.sequence(0, 11)}">
             <div class="field-row" id="'row' + ${i}">
-                <div class="color-box">
-
+                <div class="color-pin-container">
+                    <div th:each="i: ${#numbers.sequence(0, 3)}">
+                        <div class="color-pin"></div>
+                    </div>
                 </div>
                 <div class="feedback-box">
+                    <div class="feedback-pin pin-white"></div>
                     <div class="feedback-pin"></div>
                     <div class="feedback-pin"></div>
-                    <div class="feedback-pin"></div>
-                    <div class="feedback-pin"></div>
+                    <div class="feedback-pin pin-white"></div>
 
                 </div>
             </div>

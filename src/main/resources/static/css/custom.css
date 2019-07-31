@@ -34,29 +34,39 @@ body {
 	grid-column-gap: 5%;
 }
 
-.color-box {
+.color-pin-container {
 	grid-column: 1;
-	background-color: white;
-	opacity: 0.5;
+	background-color: rgba(255,255,255,0.5);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+
+}
+
+.color-pin {
+	width: 40px;
+	height: 40px;
+	margin: 20px auto;
+	border-radius: 100%;
+	background-color: black;
+
 }
 
 .feedback-box {
 	grid-column: 2;
-	background-color: white;
-	opacity: 0.5;
+	background-color: rgba(255,255,255,0.5);
 	display: grid;
 	grid-template-rows: repeat(2,1fr);
 	grid-template-columns: repeat(2,1fr);
-	min-height: 60px;
+	height: 80px;
 }
 
 .feedback-pin {
 	border-radius: 100%;
-	width: 30px;
-	height: 30px;
-	margin: 5% auto;
-	opacity: 1;
+	width: 25px;
+	height: 25px;
+	margin: 7.5px auto;
 	background-color: red;
+	opacity: 1;
 }
 
 .feedback-pin:nth-child(1) {
@@ -79,6 +89,30 @@ body {
 	grid-row: 2;
 }
 
+.pin-white {
+	background-color: white;
+}
+
+.feedback-pin-white:nth-child(1) {
+	grid-column:1;
+	grid-row: 1;
+}
+
+.feedback-pin-white:nth-child(2) {
+	grid-column:2;
+	grid-row: 1;
+}
+
+.feedback-pin-white:nth-child(3) {
+	grid-column:1;
+	grid-row: 2;
+}
+
+.feedback-pin-white:nth-child(4) {
+	grid-column:2;
+	grid-row: 2;
+}
+
 .color-select{
 	grid-row: 3;
 	height: 80px;
@@ -92,8 +126,7 @@ body {
 	height: 80%;
 	width: 80%;
 	margin: 10%;
-	background-color: white;
-	opacity: 0.5;
+	background-color: rgba(255,255,255,0.5);
 }
 
 #selected-color:nth-child(1){
@@ -123,7 +156,8 @@ body {
 }
 
 .lösung-container {
-	width: 400px;
+	width: 100%;
+	max-width: 340px;
 	grid-row: 1;
 	margin: 0 auto;
 	border-radius: 0 0 10px 10px;
@@ -132,7 +166,7 @@ body {
 	grid-template-columns: repeat(4, 1fr);
 	position: fixed;
 	z-index: 99;
-	left: calc(50% - 200px);
+	left: calc(50% - 170px);
 }
 
 .lösung:nth-child(1) {
