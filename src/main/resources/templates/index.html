@@ -42,7 +42,7 @@
                 </tr>
             </table>
             <div class="ok-btn-container">
-                <button class="btn btn-primary ok-btn">OK</button>
+                <button class="btn btn-primary ok-btn" th:disable="${buttonDisable}">OK</button>
             </div>
         </div>
     </form>
@@ -57,5 +57,6 @@
     });
 
         </script>
+
 </body>
 </html>
