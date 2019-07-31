@@ -63,13 +63,17 @@ public class HomeController {
    }
 
    private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
+      LOGGER.debug("--> addColorPosition");
       RowObject rowObject = new RowObject();
       pinPlacement.getColors().forEach(rowObject::addColor);
       rowObject.addFeedback(responseObject.getCorrectPositions(), responseObject.getCorrectColors());
       rowObjectList.add(rowObject);
+      LOGGER.debug("<-- addColorPosition")
    }
 
    private void clearAttempts(){
+      LOGGER.debug("--> clearAttempts");
       rowObjectList.removeAll(rowObjectList);
+      LOGGER.debug("<-- clearAttempts");
    }
 }
