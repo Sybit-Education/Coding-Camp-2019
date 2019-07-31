@@ -5,12 +5,35 @@ body {
 	width: 100%;
 	background-image: url("../images/background.jpg");
 }
+
 .footer {
-	/* Set the fixed height of the footer here */
-	height: 60px;
-	line-height: 60px; /* Vertically center the text there */
-	background-color: hsl(0, 0%, 96%);
+   	/* Set the fixed height of the footer here */
+   	height: 50px;
+   	line-height: 50px; /* Vertically center the text there */
+   	background-color: hsl(0, 0%, 96%);
+	opacity: 0.9;
 }
+
+
+ @media screen and (max-width: 767px) {
+    .footer {
+    	/* Set the fixed height of the footer here */
+    	height: 50px;
+    	line-height: 25px; /* Vertically center the text there */
+    	background-color: hsl(0, 0%, 96%);
+    	opacity: 0.9;
+    }
+  }
+
+ @media screen and (max-width: 337px) {
+    .footer {
+    	/* Set the fixed height of the footer here */
+    	height: 50px;
+    	line-height: 16px; /* Vertically center the text there */
+    	background-color: hsl(0, 0%, 96%);
+    	opacity: 0.9;
+    }
+  }
 
 .wrapper {
 	height: calc(100vh - 116px);
@@ -126,3 +149,9 @@ body {
     width:50px;
     height:50px;
 }
+
+.pageHeading{
+	margin-top: 70px;
+	color: white;
+}
+
