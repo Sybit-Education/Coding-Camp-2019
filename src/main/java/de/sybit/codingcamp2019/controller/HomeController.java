@@ -30,6 +30,9 @@ public class HomeController {
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
    @Autowired
+   private ColorService colorService;
+
+   @Autowired
    private GameService gameService;
 
    @Autowired
@@ -39,6 +42,9 @@ public class HomeController {
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
       gameService.checkExistingGameForSession(session);
+      PinPlacement pinPlacement = new PinPlacement();
+      model.addAttribute(pinPlacement);
+      model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       clearAttempts();
       LOGGER.debug("<-- newGame");
       return "index";
@@ -64,13 +70,17 @@ public class HomeController {
    }
 
    private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
+      LOGGER.debug("--> addColorPosition");
       RowObject rowObject = new RowObject();
       pinPlacement.getColors().forEach(rowObject::addColor);
       rowObject.addFeedback(responseObject.getCorrectPositions(), responseObject.getCorrectColors());
       rowObjectList.add(rowObject);
+      LOGGER.debug("<-- addColorPosition");
    }
 
    private void clearAttempts(){
+      LOGGER.debug("--> clearAttempts");
       rowObjectList.removeAll(rowObjectList);
+      LOGGER.debug("<-- clearAttempts");
    }
 }
