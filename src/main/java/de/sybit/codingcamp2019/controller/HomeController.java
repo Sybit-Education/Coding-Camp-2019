@@ -24,6 +24,7 @@ public class HomeController {
 
    @Autowired
    private ColorService colorService;
+
    @Autowired
    private GameService gameService;
 

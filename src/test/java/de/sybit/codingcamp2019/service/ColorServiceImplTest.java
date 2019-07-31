@@ -1,7 +1,6 @@
 package de.sybit.codingcamp2019.service;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +28,19 @@ public class ColorServiceImplTest {
    }
 
    @Test
-   public void checkforDoubles_True() {
+   public void checkForDoubles_True() {
       List<String> colorList = new ArrayList<>();
       colorList.add("#b51783");
       colorList.add("#00ffff");
       colorList.add("#b51783"); //lila
-      Assert.assertTrue(colorService.checkforDoubles(colorList, "#b51783"));
+      Assert.assertTrue(colorService.checkForDoubles(colorList, "#b51783"));
    }
 
    @Test
-   public void checkforDoubles_False() {
+   public void checkForDoubles_False() {
       List<String> colorList = new ArrayList<>();
       colorList.add("#b51783");
       colorList.add("#00ffff");
-      Assert.assertFalse(colorService.checkforDoubles(colorList, "#b51783"));
+      Assert.assertFalse(colorService.checkForDoubles(colorList, "#b51783"));
    }
 }

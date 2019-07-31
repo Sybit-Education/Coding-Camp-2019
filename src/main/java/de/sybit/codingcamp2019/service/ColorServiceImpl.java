@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +21,7 @@ public class ColorServiceImpl implements ColorService {
 
       while (resultColorList.size() < amount) {
          String randomHexColor = getRandomHexColor();
-         if (!checkforDoubles(resultColorList, randomHexColor)) {
+         if (!checkForDoubles(resultColorList, randomHexColor)) {
             resultColorList.add(randomHexColor);
          }
       }
@@ -31,23 +30,20 @@ public class ColorServiceImpl implements ColorService {
    }
 
    @Override
-   public boolean checkforDoubles(List<String> resultColorList, String randomHexColor) {
+   public boolean checkForDoubles(List<String> resultColorList, String randomHexColor) {
       int vorgekommen = 0;
       for (String color : resultColorList) {
          if (color.equals(randomHexColor)) {
             vorgekommen++;
          }
       }
-      if (vorgekommen < 2) {
-         return false;
-      }
-      return true;
+      return vorgekommen >= 2;
    }
 
    /**
     * Get random Color
     *
-    * @return
+    * @return hex value of random color
     */
    @Override
    public String getRandomHexColor() {
@@ -67,10 +63,10 @@ public class ColorServiceImpl implements ColorService {
 
       List<ColorSelectionObject> colorSelectionObjects = new ArrayList<>();
       List<String> farbenliste = getAllPossibleColors();
-   for(int i=0;i<farbenliste.size();i++){
-   String currentColor=farbenliste.get(i);
-   colorSelectionObjects.add(new ColorSelectionObject(currentColor,i));
-}
+      for (int i = 0; i < farbenliste.size(); i++) {
+         String currentColor = farbenliste.get(i);
+         colorSelectionObjects.add(new ColorSelectionObject(currentColor, i));
+      }
       LOGGER.debug("<-- getAllPossibleColorsForPicker");
       return colorSelectionObjects;
    }
@@ -78,7 +74,7 @@ public class ColorServiceImpl implements ColorService {
    /**
     * Gets a List of every defined colors
     *
-    * @return
+    * @return all colors to play with
     */
    private List<String> getAllPossibleColors() {
       LOGGER.debug("--> getAllPossibleColors");
