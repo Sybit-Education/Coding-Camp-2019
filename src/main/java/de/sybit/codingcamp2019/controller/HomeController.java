@@ -2,6 +2,8 @@ package de.sybit.codingcamp2019.controller;
 
 import de.sybit.codingcamp2019.objects.Game;
 import de.sybit.codingcamp2019.objects.PinPlacement;
+import de.sybit.codingcamp2019.objects.ResponseObject;
+import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.GameService;
 import org.slf4j.Logger;
@@ -15,10 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
 public class HomeController {
+
+   @Autowired
+   private List<RowObject> rowObjectList = new ArrayList<>();
+
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
@@ -50,6 +58,13 @@ public class HomeController {
       gameService.restartGame(session);
       LOGGER.debug("--> restartCurrentGame");
       return "redirect:/";
+   }
+
+   private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
+      RowObject rowObject = new RowObject();
+      pinPlacement.getColors().forEach(rowObject::addColor);
+      rowObject.addFeedback(responseObject.getCorrectPositions(), responseObject.getCorrectColors());
+      rowObjectList.add(rowObject);
    }
 
 }
