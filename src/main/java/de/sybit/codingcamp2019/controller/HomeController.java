@@ -68,7 +68,7 @@ public class HomeController {
       pinPlacement.getColors().forEach(rowObject::addColor);
       rowObject.addFeedback(responseObject.getCorrectPositions(), responseObject.getCorrectColors());
       rowObjectList.add(rowObject);
-      LOGGER.debug("<-- addColorPosition")
+      LOGGER.debug("<-- addColorPosition");
    }
 
    private void clearAttempts(){
