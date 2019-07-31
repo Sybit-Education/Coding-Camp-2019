@@ -39,6 +39,7 @@ public class HomeController {
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
       gameService.checkExistingGameForSession(session);
+      clearAttempts();
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -52,8 +53,6 @@ public class HomeController {
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
-
-
 
    @GetMapping("/restart")
    public String restartCurrentGame(HttpSession session) {
@@ -70,4 +69,7 @@ public class HomeController {
       rowObjectList.add(rowObject);
    }
 
+   private void clearAttempts(){
+      rowObjectList.removeAll(rowObjectList);
+   }
 }
