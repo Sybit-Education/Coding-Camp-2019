@@ -81,6 +81,8 @@ pipeline {
                 docker.withRegistry('https://coding-camp.artifactory.sybit.de', 'sybit_ausbildung_artifactory') {
                    customImage1.push("${branchName}-${env.BUILD_NUMBER}")
                    customImage2.push("latest")
+
+                    sh 'docker image prune -a --force --filter "until=240h"' //cleanup docker images
                 }
             }
         }
@@ -98,7 +100,7 @@ pipeline {
 
     stage('Deploy Production') {
         when {
-            branch 'develop' //TODO: switch back to master!
+            branch 'master'
         }
         steps {
             echo 'Deploy master on PROD-Server ...'
