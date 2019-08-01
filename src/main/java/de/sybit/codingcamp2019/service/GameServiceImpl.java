@@ -69,13 +69,13 @@ public class GameServiceImpl implements GameService {
       List<String> colors = colorService.getAmountOfRandomColor(4);
       Map<Integer, String> solution = new HashMap<>();
 
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < colors.size(); i++) {
          solution.put(i, colors.get(i));
       }
 
       PinPlacement pinPlacement = new PinPlacement();
-
       pinPlacement.setColors(solution);
+
       newGame.setPinSolution(pinPlacement);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
 
