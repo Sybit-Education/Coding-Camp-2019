@@ -13,6 +13,9 @@
             <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
+    <input type="hidden" id="getColors" th:value="${correctColors}"/>
+    <input type="hidden" id="getPositions" th:value="${correctPositions}"/>
+    <input type="hidden" id="feedbackSize" th:value="${feedbackSize}"/>
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
@@ -22,9 +25,7 @@
 
                         </div>
                     </td>
-                    <td class="feedback-container">
-                        <input type="hidden" th:value="${correctColors}" id="getColors"/>
-                        <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
+                    <td class="feedback-container" th:each="a : ${feedbackSize}" th:id="'feedback-container-'+ ${a}">
                     </td>
                 </tr>
             </th:block>
@@ -41,7 +42,8 @@
         </div>
 
         <div class="ok-btn-container">
-            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
+            <!--<button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>-->
+            <button type="submit" class="btn btn-primary ok-btn">OK</button>
         </div>
     </form>
 
@@ -56,27 +58,29 @@
     </script>
 
     <script>
-        var attempt = document.getElementsByClassName('field-row').length -1;
+        var attempt = document.getElementsByClassName('field-row').length;
+        var numRows = $("#feedbackSize").val();
         function createFbPins(row) {
             var correctColors = $("#getColors").val();
             var correctPositions = $("#getPositions").val();
-            console.log(correctColors,correctPositions)
+            console.log(numRows);
+            console.log(correctColors,correctPositions);
+            var FbContainer = document.getElementById(`feedback-container-${numRows}`);
+            console.log(FbContainer);
+                for(let i = 0; i< correctColors; i++) {
+                    let pin = document.createElement('div');
+                    FbContainer.appendChild(pin);
+                    pin.classList.add('feedback-pin');
 
-            let FbContainer = document.getElementById(`feedback-container-${row}`);
-            for(let i = 0; i< correctColors; i++) {
-                let pin = document.createElement('div');
-                FbContainer.appendChild(pin);
-                pin.classList.add('feedback-pin');
-
-            }
-            for (let j = 0;j<correctPositions; j++) {
-                let pinRed = document.createElement('div');
-                FbContainer.appendChild(pinRed);
-                pinRed.classList.add('feedback-pin');
-                pinRed.classList.add('pin-red');
-            }
+                }
+                for (let j = 0;j<correctPositions; j++) {
+                    let pinRed = document.createElement('div');
+                    FbContainer.appendChild(pinRed);
+                    pinRed.classList.add('feedback-pin');
+                    pinRed.classList.add('pin-red');
+                }
         }
-            createFbPins(attempt);
+            createFbPins(numRows);
     </script>
 </body>
 </html>

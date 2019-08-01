@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.sybit.codingcamp2019.objects.GameStateEnum.PLAYING;
+import static de.sybit.codingcamp2019.objects.GameStateEnum.WON;
 
 
 @Controller
@@ -57,6 +58,7 @@ public class HomeController {
       addColorPosition(pinPlacement, responseObject);
       modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       modelAndView.addObject("feedback", rowObjectList);
+      modelAndView.addObject("feedbackSize", rowObjectList.size());
 
       GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
       if (gameState.equals(PLAYING)) {
