@@ -19,7 +19,6 @@
             <div class="field-row" id="'row' + ${i}">
                 <div class="color-pin-container">
                     <div th:each="i: ${#numbers.sequence(0, 3)}">
-                        <!--<div class="color-pin"></div>-->
                     </div>
                 </div>
                 <input type="hidden" th:value="${correctColors}" id="getColors"/>
@@ -38,18 +37,6 @@
                             th:attr="data-color=${color.colorHex}"></option>
                 </select>
         </div>
-        <!--<table class="col-6">
-            <tr class="row">
-                <th:block th:each="entry, entryStat: *{colors}">
-                    <td class="field-selection field col " th:id="${i}">
-                        <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
-                            <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
-                                    th:attr="data-color=${color.colorHex}"></option>
-                        </select>
-                    </td>
-                </th:block>
-            </tr>
-        </table>-->
         <div class="ok-btn-container">
             <button type="submit" class="btn btn-primary ok-btn">OK</button>
         </div>
