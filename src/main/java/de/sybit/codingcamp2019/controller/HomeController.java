@@ -62,7 +62,6 @@ public class HomeController {
       modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
       modelAndView.setViewName("index");
       GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
-      gameState = GameStateEnum.WON;
       if (gameState.equals(GameStateEnum.WON)) {
          Game game = null;
          try {
