@@ -70,8 +70,6 @@ public class HomeController {
       gameService.restartGame(session);
       LOGGER.debug("--> restartCurrentGame");
       return "redirect:/";
-
-
    }
 
    private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
