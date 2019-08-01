@@ -1,5 +1,8 @@
 package de.sybit.codingcamp2019.controller;
 
+import de.sybit.codingcamp2019.objects.PinPlacement;
+import de.sybit.codingcamp2019.objects.ResponseObject;
+import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.exception.GameNotFoundException;
 import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.service.ColorService;
@@ -52,10 +55,14 @@ public class HomeController {
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
-      //addColorPosition(pinPlacement, responseObject);
+      addColorPosition(pinPlacement, responseObject);
+      modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
+      modelAndView.addObject("feedback", rowObjectList);
+      modelAndView.addObject("correctColors", responseObject.getCorrectColors());
+      modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
       modelAndView.setViewName("index");
-      //GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
-      GameStateEnum gameState = GameStateEnum.WON;
+      GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
+      gameState = GameStateEnum.WON;
       if (gameState.equals(GameStateEnum.WON)) {
          Game game = null;
          try {

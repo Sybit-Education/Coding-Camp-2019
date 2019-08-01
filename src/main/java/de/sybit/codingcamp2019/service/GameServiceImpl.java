@@ -71,16 +71,18 @@ public class GameServiceImpl implements GameService {
    public Game createGameFor(@NotNull final HttpSession session) {
       LOGGER.debug("--> createGameFor");
       final Game newGame = new Game();
-      PinPlacement solution = new PinPlacement();
-      List<String> solutionColors = colorService.getAmountOfRandomColor(4);
-      Map<Integer, String> colors = new HashMap<>();
 
-      for (int i = 0; i < solutionColors.size(); i++) {
-         colors.put(i, solutionColors.get(i));
+      List<String> colors = colorService.getAmountOfRandomColor(4);
+      Map<Integer, String> solution = new HashMap<>();
+
+      for (int i = 0; i < 4; i++) {
+         solution.put(i ,colors.get(i));
       }
 
-      solution.setColors(colors);
-      newGame.setPinSolution(solution);
+      PinPlacement pinPlacement = new PinPlacement();
+
+      pinPlacement.setColors(solution);
+      newGame.setPinSolution(pinPlacement);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
 
       LOGGER.debug("<-- createGameFor");
