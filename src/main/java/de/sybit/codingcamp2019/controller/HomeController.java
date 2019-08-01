@@ -6,6 +6,7 @@ import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
+import de.sybit.codingcamp2019.service.GameServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,8 @@ public class HomeController {
       gameService.restartGame(session);
       LOGGER.debug("--> restartCurrentGame");
       return "redirect:/";
+
+
    }
 
    private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
