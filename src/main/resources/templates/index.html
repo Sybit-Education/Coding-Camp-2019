@@ -11,74 +11,69 @@
 <main class="container wrapper">
     <div class="lösung-container">
         <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <div class="lösung"><p class="p-lösung">?</p></div>
+            <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
     <div class="play-ground">
 
-
-
-
-
         <div th:each="i: ${#numbers.sequence(0, 11)}">
             <div class="field-row" id="'row' + ${i}">
-                <div class="color-box">
-
+                <div class="color-pin-container">
+                    <div th:each="i: ${#numbers.sequence(0, 3)}">
+                    </div>
                 </div>
-                <div class="feedback-box">
+                <input type="hidden" th:value="${correctColors}" id="getColors"/>
+                <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
+                <div class="feedback-container" th:id="'feedback-container-' +${i}">
 
                 </div>
             </div>
         </div>
     </div>
+    <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
+        <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
 
-    <div class="color-select">
-        <div th:each="i: ${#numbers.sequence(0, 3)}">
-                <div class="selected-color" id="'selected-color' + ${i}"></div>
+                <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
+                    <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
+                            th:attr="data-color=${color.colorHex}"></option>
+                </select>
         </div>
+
         <div class="ok-btn-container">
-            <button class="btn btn-primary ok-btn">OK</button>
+            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
         </div>
-    </div>
+    </form>
 
 </main>
+    <div th:replace="include/footer :: footer"></div>
+    <script>
+        var attempt = 0;
+        function createFbPins(row) {
+            var correctColors = $("#getColors").val();
+            var correctPositions = $("#getPositions").val();
+            console.log(correctColors,correctPositions)
 
-<div th:replace="include/footer :: footer"></div>
+            let FbContainer = document.getElementById(`feedback-container-${row}`);
+            for(let i = 0; i< correctColors; i++) {
+                let pin = document.createElement('div');
+                FbContainer.appendChild(pin);
+                pin.classList.add('feedback-pin');
 
-<style>
-      .ad2hs-prompt {
-        background-color: rgb(59, 134, 196); /* Blue */
-        border: none;
-        display: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        position: absolute;
-        margin: 0 1rem 1rem;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: calc(100% - 32px);
-      }
+            }
+            for (let j = 0;j<correctPositions; j++) {
+                let pinRed = document.createElement('div');
+                FbContainer.appendChild(pinRed);
+                pinRed.classList.add('feedback-pin');
+                pinRed.classList.add('pin-red');
+            }
+        }
+            createFbPins(attempt);
 
-      .ios-prompt {
-        background-color: #fcfcfc;
-        border: 1px solid #666;
-        display: none;
-        padding: 0.8rem 1rem 0 0.5rem;
-        text-decoration: none;
-        font-size: 16px;
-        color: #555;
-        position: absolute;
-        margin: 0 auto 1rem;
-        left: 1rem;
-        right: 1rem;
-        bottom: 0;
-      }
-    </style>
-
-
+    $('.colorSelector').colorselector().on('change',function() {
+    var color=$(this).find(':selected').attr('data-color');
+    $(this).parent().closest('td').css('background', color);
+    $(this).parent().closest('td').data("value",color);
+    });
+    </script>
 </body>
 </html>
