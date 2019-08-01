@@ -19,7 +19,6 @@
             <div class="field-row" id="'row' + ${i}">
                 <div class="color-pin-container">
                     <div th:each="i: ${#numbers.sequence(0, 3)}">
-                        <!--<div class="color-pin"></div>-->
                     </div>
                 </div>
                 <input type="hidden" th:value="${correctColors}" id="getColors"/>
@@ -49,6 +48,8 @@
     <script>
     $('.colorSelector').colorselector().on('change',function() {
     var color=$(this).find(':selected').attr('data-color');
+    $(this).parent().closest('td').css('background', color);
+    $(this).parent().closest('td').data("value",color);
     });
     </script>
 
