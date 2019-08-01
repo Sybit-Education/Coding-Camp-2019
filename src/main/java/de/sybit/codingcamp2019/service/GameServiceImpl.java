@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -70,8 +71,16 @@ public class GameServiceImpl implements GameService {
    public Game createGameFor(@NotNull final HttpSession session) {
       LOGGER.debug("--> createGameFor");
       final Game newGame = new Game();
+      PinPlacement solution = new PinPlacement();
+      List<String> solutionColors = colorService.getAmountOfRandomColor(4);
+      Map<Integer, String> colors = new HashMap<>();
 
-      // TODO
+      for (int i = 0; i < solutionColors.size(); i++) {
+         colors.put(i, solutionColors.get(i));
+      }
+
+      solution.setColors(colors);
+      newGame.setPinSolution(solution);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
 
       LOGGER.debug("<-- createGameFor");

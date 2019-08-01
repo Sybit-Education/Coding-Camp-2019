@@ -124,6 +124,11 @@ body {
 	grid-template-columns: repeat(4, 1fr);
 }
 
+.lösung{
+    width: 20px;
+    height: 20px;
+}
+
 .lösung:nth-child(1) {
 	grid-column: 1;
 }
