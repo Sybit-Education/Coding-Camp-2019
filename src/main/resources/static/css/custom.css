@@ -120,13 +120,17 @@ body {
 	margin: 0 auto;
 	border-radius: 0 0 10px 10px;
 	background-color: black;
-	display: grid;
+	display: flex;
 	grid-template-columns: repeat(4, 1fr);
+	justify-content: space-evenly;
+    align-items: center;
 }
 
 .lösung{
+
     width: 20px;
     height: 20px;
+
 }
 
 .lösung:nth-child(1) {
