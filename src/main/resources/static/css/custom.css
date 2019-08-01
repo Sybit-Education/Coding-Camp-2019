@@ -1,11 +1,17 @@
 body {
 	height: calc(100vh - 60px);
+	width: 100%;
 	margin: 0;
 	background-size: cover;
-	width: 100%;
 	background-image: url("../images/background.jpg");
 }
 
+
+.container-opaque {
+	background-color: rgba(255,255,255,0.3);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
 .footer {
    	/* Set the fixed height of the footer here */
    	height: 50px;
@@ -245,18 +251,13 @@ body {
 }
 
 .pageHeading{
-    margin-top: 100px;
 	color: white;
-	font-family: Verdana;
-	font-size: 45px;
 }
 
 .pageContent {
-    font-family: Verdana;
     color: white;
-    font-size: 25px;
+    font-size: 1.2rem;
     margin-bottom: 50px;
-    margin-top: 100px;
 }
 
 .customLink{
@@ -267,4 +268,14 @@ body {
 .customLink:hover {
 	color: black;
 	text-decoration: none;
+}
+
+.text {
+
+color: white;
+
+}
+.red {
+color: black;
+
 }
