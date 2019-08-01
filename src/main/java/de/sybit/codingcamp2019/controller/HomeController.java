@@ -70,7 +70,7 @@ public class HomeController {
             modelAndView.addObject("solution", pinPlacementSolution);
          }
          catch (GameNotFoundException e){
-
+            LOGGER.debug("No Game found", e);
          }
       }
       LOGGER.debug("<-- attempt");

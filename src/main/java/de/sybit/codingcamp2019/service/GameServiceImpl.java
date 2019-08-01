@@ -96,13 +96,15 @@ public class GameServiceImpl implements GameService {
       try {
          game = getCurrentGameOf(session);
          PinPlacement pinPlacementSolution = game.getPinSolution();
-         if (pinPlacementSolution ==  currentPinPlacement){
-            game.setStatus(GameStateEnum.WON);
-
+         game.setStatus(GameStateEnum.WON);
+         for (int i = 0; i < 3; i++) {
+            if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
+               game.setStatus(GameStateEnum.PLAYING);
+            }
          }
       }
       catch(GameNotFoundException e){
-
+         LOGGER.debug("No Game found", e);
       }
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
