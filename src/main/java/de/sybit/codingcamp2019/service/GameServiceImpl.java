@@ -77,6 +77,7 @@ public class GameServiceImpl implements GameService {
       pinPlacement.setColors(solution);
 
       newGame.setPinSolution(pinPlacement);
+      newGame.setAttemptCount(0);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
 
       LOGGER.debug("<-- createGameFor");
@@ -96,7 +97,17 @@ public class GameServiceImpl implements GameService {
 
          gameStateEnum = GameStateEnum.WON;
          if (attemptCount >= MAX_TRIES) {
-            gameStateEnum = GameStateEnum.LOOSE;
+            boolean lastTryWon = true;
+            for (int i = 0; i < 4; i++) {
+               if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
+                  lastTryWon = false;
+               }
+            }
+            if(lastTryWon){
+               gameStateEnum = GameStateEnum.WON;
+            } else {
+               gameStateEnum = GameStateEnum.LOOSE;
+            }
          } else {
             for (int i = 0; i < 4; i++) {
                if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
