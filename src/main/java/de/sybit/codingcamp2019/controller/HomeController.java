@@ -1,6 +1,5 @@
 package de.sybit.codingcamp2019.controller;
 
-import de.sybit.codingcamp2019.objects.Game;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.ResponseObject;
 import de.sybit.codingcamp2019.objects.RowObject;
@@ -55,6 +54,10 @@ public class HomeController {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
       addColorPosition(pinPlacement, responseObject);
+      modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
+      modelAndView.addObject("feedback", rowObjectList);
+      modelAndView.addObject("correctColors", responseObject.getCorrectColors());
+      modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
       modelAndView.setViewName("index");
       LOGGER.debug("<-- attempt");
       return modelAndView;

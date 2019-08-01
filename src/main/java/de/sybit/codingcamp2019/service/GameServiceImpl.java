@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -71,9 +72,18 @@ public class GameServiceImpl implements GameService {
       LOGGER.debug("--> createGameFor");
       final Game newGame = new Game();
 
-      // TODO
-      session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
+      List<String> colors = colorService.getAmountOfRandomColor(4);
+      Map<Integer, String> solution = new HashMap<>();
 
+      for (int i = 0; i < 4; i++) {
+         solution.put(i ,colors.get(i));
+      }
+
+      PinPlacement pinPlacement = new PinPlacement();
+
+      pinPlacement.setColors(solution);
+      newGame.setPinSolution(pinPlacement);
+      session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
       LOGGER.debug("<-- createGameFor");
       return newGame;
    }
