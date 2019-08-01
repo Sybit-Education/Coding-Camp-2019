@@ -1,5 +1,5 @@
 body {
-	height: calc(100vh);
+	height: calc(100vh - 60px);
 	margin: 0;
 	background-size: cover;
 	width: 100%;
@@ -139,12 +139,12 @@ body {
 }
 
 .color-select{
-	height: 140px;
+	height: 130px;
 	margin-bottom: 30px;
 	grid-row: 3;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(2, 1fr);
+	grid-template-rows: 1fr auto;
 }
 
 .selected-color {
@@ -188,9 +188,8 @@ body {
 }
 
 .ok-btn {
-	width: 75%;
-	height: 60%;
-	margin: 12.5% 10%;
+	width: 80%;
+	margin-left: 10%;
 	border-radius: 20px 20px 20px 20px;
 
 }
