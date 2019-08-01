@@ -151,7 +151,20 @@ body {
 }
 
 .pageHeading{
-	margin-top: 70px;
+    margin-top: 100px;
 	color: white;
+	font-family: Verdana;
+	font-size: 45px;
+}
+.anleitung {
+    font-family: Verdana;
+    color: white;
+    font-size: 25px;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+.customLink{
+    color: white;
+    text-decoration: underline;
 }
 
