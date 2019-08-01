@@ -243,15 +243,21 @@ body {
 	font-family: Verdana;
 	font-size: 45px;
 }
-.anleitung {
+
+.pageContent {
     font-family: Verdana;
     color: white;
     font-size: 25px;
     margin-bottom: 50px;
     margin-top: 100px;
 }
+
 .customLink{
     color: white;
     text-decoration: underline;
 }
 
+.customLink:hover {
+	color: black;
+	text-decoration: none;
+}
