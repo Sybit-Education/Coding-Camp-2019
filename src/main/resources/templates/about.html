@@ -7,9 +7,65 @@
 </head>
 
 <body>
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
-<main role="main" class="container">
+
+<main role="main" class="container container-opaque">
     <h1 class="pageHeading">Mastermind: Über uns</h1>
+
+    <h2> Das Team</h2>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-12 col-sm-12">
+        <img th:src="@{/images/sybit-coding-camp-2019-team.png}" class="img-fluid"
+             alt="Foto des Coding Camp Teams" >
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12 pageContent">
+
+            <h3>Praktikanten</h3>
+            <ul>
+                <li>Florian Müller</li>
+                <li>Jannik Braunwarth</li>
+                <li>Jeremy Czerner</li>
+                <li>Laura Matz</li>
+                <li>Matteo Frey</li>
+                <li>Niklas Dietze</li>
+                <li>Raphael Schnick</li>
+                <li>Shrey Pethkar</li>
+                <li>Tim Apel</li>
+            </ul>
+        </div>
+        <div class="col-xl-3 col-md-6 col-sm-12 pageContent">
+            <h3>Azubis</h3>
+            <ul>
+                <li>Christian Wolter</li>
+                <li>Daniele Suppa</li>
+                <li>Gabriel Berchmann</li>
+                <li>Nico Genz</li>
+                <li>Nikolaj Lerch</li>
+                <li>Simon Popp</li>
+            </ul>
+
+            <h3>Leitung</h3>
+            <ul>
+                <li>Stephan Strittmatter</li>
+            </ul>
+
+        </div>
+    </div>
+
+    <h2>Das Projekt</h2>
+    <p class="pageContent">
+        In der Woche vom 29.07-02.08.2019 haben wir das Spiel Mastermind progammiert.<br>
+        Angefangen haben wir damit, indem wir Storys aufgeschrieben haben und zur jeder Story
+        gab es mehrere Tasks die zu erledigen waren.<br>
+        In den folgenden Tagen haben wir die Storys und Tasks nach und nach abgearbeitet.
+        Die Azubis haben in dieser Zeit auch die Praktikanten dabei unterstützt.
+        Uns Praktikanten wurde viel gezeigt und auch erklärt.
+        Wir haben gesehen und es selbst miterlebt, wie es ist in einem Team zusammenzuarbeiten,
+        und konnten viel daraus lernen.
+    </p>
+
 </main>
 <div th:replace="include/footer :: footer"></div>
 </body>
