@@ -5,13 +5,12 @@
 </head>
 <body>
 
-
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
     <div class="lösung-container">
         <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <div class="lösung"><p class="p-lösung">?</p></div>
+            <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
     <div class="playground-container">
@@ -42,7 +41,7 @@
         </div>
 
         <div class="ok-btn-container">
-            <button type="submit" class="btn btn-primary ok-btn">OK</button>
+            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
         </div>
     </form>
 
@@ -77,7 +76,6 @@
                 pinRed.classList.add('pin-red');
             }
         }
-
             createFbPins(attempt);
     </script>
 </body>

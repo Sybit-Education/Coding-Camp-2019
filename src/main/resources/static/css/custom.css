@@ -195,23 +195,30 @@ body {
 	width: 80%;
 	margin-left: 10%;
 	border-radius: 20px 20px 20px 20px;
-
 }
 
 .lösung-container {
 	width: 100%;
 	max-width: 340px;
 	height: 70px;
-
 	grid-row: 1;
 	margin: 0 auto;
 	border-radius: 0 0 10px 10px;
 	background-color: black;
-	display: grid;
+	display: flex;
 	grid-template-columns: repeat(4, 1fr);
-	position: fixed;
-	z-index: 99;
-	left: calc(50% - 170px);
+	justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    z-index: 99;
+    left: calc(50% - 170px);
+}
+
+.lösung{
+    border-radius: 100%;
+    width: 35px;
+    height:35px;
+
 }
 
 .lösung:nth-child(1) {
@@ -246,15 +253,21 @@ body {
 	font-family: Verdana;
 	font-size: 45px;
 }
-.anleitung {
+
+.pageContent {
     font-family: Verdana;
     color: white;
     font-size: 25px;
     margin-bottom: 50px;
     margin-top: 100px;
 }
+
 .customLink{
     color: white;
     text-decoration: underline;
 }
 
+.customLink:hover {
+	color: black;
+	text-decoration: none;
+}
