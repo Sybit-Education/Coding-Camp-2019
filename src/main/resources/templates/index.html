@@ -5,6 +5,7 @@
 </head>
 <body>
 
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
@@ -46,14 +47,6 @@
 </main>
     <div th:replace="include/footer :: footer"></div>
     <script>
-    $('.colorSelector').colorselector().on('change',function() {
-    var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('td').css('background', color);
-    $(this).parent().closest('td').data("value",color);
-    });
-    </script>
-
-    <script>
         var attempt = 0;
         function createFbPins(row) {
             var correctColors = $("#getColors").val();
@@ -75,6 +68,12 @@
             }
         }
             createFbPins(attempt);
+
+    $('.colorSelector').colorselector().on('change',function() {
+    var color=$(this).find(':selected').attr('data-color');
+    $(this).parent().closest('td').css('background', color);
+    $(this).parent().closest('td').data("value",color);
+    });
     </script>
 </body>
 </html>
