@@ -44,7 +44,7 @@ public class GameServiceImpl implements GameService {
    @Override
    public Game getCurrentGameOf(final HttpSession session) throws GameNotFoundException {
       Game game = (Game) session.getAttribute(SessionKeys.SESSION_GAME.toString());
-      if(game == null) {
+      if (game == null) {
          throw new GameNotFoundException("Game not found in session. Session killed?");
       }
       return game;
@@ -70,7 +70,7 @@ public class GameServiceImpl implements GameService {
       Map<Integer, String> solution = new HashMap<>();
 
       for (int i = 0; i < 4; i++) {
-         solution.put(i ,colors.get(i));
+         solution.put(i, colors.get(i));
       }
 
       PinPlacement pinPlacement = new PinPlacement();
@@ -87,28 +87,30 @@ public class GameServiceImpl implements GameService {
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
       Game game = null;
+      GameStateEnum gameStateEnum;
       try {
          game = getCurrentGameOf(session);
          PinPlacement pinPlacementSolution = game.getPinSolution();
          int attemptCount = game.getAttemptCount();
-         attemptCount ++;
-         game.setStatus(GameStateEnum.WON);
-         if (attemptCount == MAX_TRIES){
-            game.setStatus(GameStateEnum.LOOSE);
+         attemptCount++;
+
+         gameStateEnum = GameStateEnum.WON;
+         if (attemptCount == MAX_TRIES) {
+            gameStateEnum = GameStateEnum.LOOSE;
          } else {
             for (int i = 0; i < 3; i++) {
                if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
-                  game.setStatus(GameStateEnum.PLAYING);
+                  gameStateEnum = GameStateEnum.PLAYING;
                }
             }
          }
          game.setAttemptCount(attemptCount);
-      }
-      catch(GameNotFoundException e){
+      } catch (GameNotFoundException e) {
          LOGGER.debug("No Game found", e);
+         gameStateEnum = GameStateEnum.LOOSE;
       }
       LOGGER.debug("<-- checkGameStatus");
-      return game.getStatus();
+      return gameStateEnum;
    }
 
    @Override

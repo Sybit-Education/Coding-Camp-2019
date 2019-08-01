@@ -1,15 +1,10 @@
 package de.sybit.codingcamp2019.controller;
 
-import de.sybit.codingcamp2019.objects.GameStateEnum;
-import de.sybit.codingcamp2019.objects.PinPlacement;
-import de.sybit.codingcamp2019.objects.ResponseObject;
-import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.exception.GameNotFoundException;
 import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
-import de.sybit.codingcamp2019.service.GameServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.sybit.codingcamp2019.objects.GameStateEnum.PLAYING;
-import static javafx.scene.input.KeyCode.PLAY;
 
 
 @Controller
@@ -63,28 +57,23 @@ public class HomeController {
       addColorPosition(pinPlacement, responseObject);
       modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       modelAndView.addObject("feedback", rowObjectList);
-      modelAndView.addObject("correctColors", responseObject.getCorrectColors());
-      modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
 
       GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
       if (gameState.equals(PLAYING)) {
-         addColorPosition(pinPlacement, responseObject);
+         modelAndView.addObject("correctColors", responseObject.getCorrectColors());
+         modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
       } else {
-         modelAndView.addObject("buttonDisable", true);
-      }
-      modelAndView.setViewName("index");
-      GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
-      if (gameState.equals(GameStateEnum.WON)) {
-         Game game = null;
+         Game game;
          try {
             game = gameService.getCurrentGameOf(session);
             PinPlacement pinPlacementSolution = game.getPinSolution();
             modelAndView.addObject("solution", pinPlacementSolution);
-         }
-         catch (GameNotFoundException e){
+            modelAndView.addObject("buttonDisable", true);
+         } catch (GameNotFoundException e) {
             LOGGER.debug("No Game found", e);
          }
       }
+      modelAndView.setViewName("index");
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
@@ -106,7 +95,7 @@ public class HomeController {
       LOGGER.debug("<-- addColorPosition");
    }
 
-   private void clearAttempts(){
+   private void clearAttempts() {
       LOGGER.debug("--> clearAttempts");
       rowObjectList.removeAll(rowObjectList);
       LOGGER.debug("<-- clearAttempts");
