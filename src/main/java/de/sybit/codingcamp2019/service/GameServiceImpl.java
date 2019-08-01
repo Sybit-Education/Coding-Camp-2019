@@ -84,6 +84,7 @@ public class GameServiceImpl implements GameService {
       pinPlacement.setColors(solution);
       newGame.setPinSolution(pinPlacement);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
+
       LOGGER.debug("<-- createGameFor");
       return newGame;
    }
@@ -92,9 +93,19 @@ public class GameServiceImpl implements GameService {
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
       Game game = null;
-
-//TODO
-
+      try {
+         game = getCurrentGameOf(session);
+         PinPlacement pinPlacementSolution = game.getPinSolution();
+         game.setStatus(GameStateEnum.WON);
+         for (int i = 0; i < 3; i++) {
+            if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
+               game.setStatus(GameStateEnum.PLAYING);
+            }
+         }
+      }
+      catch(GameNotFoundException e){
+         LOGGER.debug("No Game found", e);
+      }
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
    }
