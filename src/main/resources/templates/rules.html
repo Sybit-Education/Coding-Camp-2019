@@ -9,7 +9,20 @@
 <body>
 <div th:replace="include/navigationbar :: navigationbar"></div>
 <main role="main" class="container">
-    <h1>Mastermind: Die Regeln</h1>
+    <h1 class="pageHeading">Mastermind: Die Regeln</h1>
+    <div class="pageContent">
+        <p>Genaue Infos zum Spiel Mastermind findest du hier:
+            <a class="customLink" href="https://de.wikipedia.org/wiki/Mastermind_(Spiel)" target="_blank">Mastermind</a></p>
+    </div>
+    <ol class="pageContent">
+        <li>Wähle vier Farben aus der Menüleiste aus und bestätige sie, indem du auf "OK" klickst.</li>
+        <br>
+        <li>Danach wird dir rechts angezeigt, wie viele Farben du richtig gewählt hast (weiß) und wie viele Farben auf
+            der richtigen Position sind (rot).</li>
+        <br>
+        <li>Das Spiel endet, wenn du entweder die richtigen Farben in der richtigen Position hast oder wenn du zwölf
+            Versuche verbraucht hast.</li>
+    </ol>
 </main>
 <div th:replace="include/footer :: footer"></div>
 </body>
