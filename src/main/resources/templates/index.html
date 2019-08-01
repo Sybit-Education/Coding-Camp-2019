@@ -17,33 +17,29 @@
 
         <div th:each="i: ${#numbers.sequence(0, 11)}">
             <div class="field-row" id="'row' + ${i}">
-                <div class="color-box">
-
+                <div class="color-pin-container">
+                    <div th:each="i: ${#numbers.sequence(0, 3)}">
+                    </div>
                 </div>
-                <div class="feedback-box">
+                <input type="hidden" th:value="${correctColors}" id="getColors"/>
+                <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
+                <div class="feedback-container" th:id="'feedback-container-' +${i}">
 
                 </div>
             </div>
         </div>
     </div>
+    <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
+        <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
 
-    <form action="#" th:object="${pinPlacement}" method="post" >
-        <div id="selection" class="color-select row justify-content-center fixed-bottom ">
-            <table class="col-6">
-                <tr class="row">
-                    <th:block th:each="entry, entryStat: *{colors}">
-                        <td class="field-selection field col " th:id="${i}">
-                            <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
-                                <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
-                                        th:attr="data-color=${color.colorHex}"></option>
-                            </select>
-                        </td>
-                    </th:block>
-                </tr>
-            </table>
-            <div class="ok-btn-container">
-                <button type="submit" class="btn btn-primary ok-btn" th:disable="${buttonDisable}">OK</button>
-            </div>
+                <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
+                    <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
+                            th:attr="data-color=${color.colorHex}"></option>
+                </select>
+        </div>
+
+        <div class="ok-btn-container">
+            <button type="submit" class="btn btn-primary ok-btn" th:disable="${buttonDisable}">OK</button>
         </div>
     </form>
 
@@ -55,7 +51,30 @@
     $(this).parent().closest('td').css('background', color);
     $(this).parent().closest('td').data("value",color);
     });
+    </script>
 
-        </script>
+    <script>
+        var attempt = 0;
+        function createFbPins(row) {
+            var correctColors = $("#getColors").val();
+            var correctPositions = $("#getPositions").val();
+            console.log(correctColors,correctPositions)
+
+            let FbContainer = document.getElementById(`feedback-container-${row}`);
+            for(let i = 0; i< correctColors; i++) {
+                let pin = document.createElement('div');
+                FbContainer.appendChild(pin);
+                pin.classList.add('feedback-pin');
+
+            }
+            for (let j = 0;j<correctPositions; j++) {
+                let pinRed = document.createElement('div');
+                FbContainer.appendChild(pinRed);
+                pinRed.classList.add('feedback-pin');
+                pinRed.classList.add('pin-red');
+            }
+        }
+            createFbPins(attempt);
+    </script>
 </body>
 </html>

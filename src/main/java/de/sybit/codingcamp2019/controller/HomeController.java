@@ -7,6 +7,7 @@ import de.sybit.codingcamp2019.objects.RowObject;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
+import de.sybit.codingcamp2019.service.GameServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,12 @@ public class HomeController {
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
+      addColorPosition(pinPlacement, responseObject);
+      modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
+      modelAndView.addObject("feedback", rowObjectList);
+      modelAndView.addObject("correctColors", responseObject.getCorrectColors());
+      modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
+
       GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
       if (gameState.equals(PLAYING)) {
          addColorPosition(pinPlacement, responseObject);
@@ -76,17 +83,6 @@ public class HomeController {
       return "redirect:/";
    }
 
-   private boolean checkMaxAmounts(int amount) {
-      LOGGER.debug("--> checkMaxAmounts");
-      boolean reached = false;
-      if (rowObjectList.size() <= amount) {
-         reached = true;
-      }
-
-      LOGGER.debug("<-- checkMaxAmounts");
-      return reached;
-   }
-
    private void addColorPosition(PinPlacement pinPlacement, ResponseObject responseObject) {
       LOGGER.debug("--> addColorPosition");
       RowObject rowObject = new RowObject();
@@ -96,7 +92,7 @@ public class HomeController {
       LOGGER.debug("<-- addColorPosition");
    }
 
-   private void clearAttempts() {
+   private void clearAttempts(){
       LOGGER.debug("--> clearAttempts");
       rowObjectList.removeAll(rowObjectList);
       LOGGER.debug("<-- clearAttempts");
