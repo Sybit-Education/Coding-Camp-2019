@@ -15,10 +15,10 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.junit.Assert.assertEquals;
 
-public class ScoreControllerTest {
+public class HighscoreControllerTest {
 
    @InjectMocks
-   private ScoreController scoreController;
+   private HighscoreController highscoreController;
 
    @Mock
    private Model model;
@@ -41,7 +41,7 @@ public class ScoreControllerTest {
    public void getCurrentGameScore_returnScorePage() throws GameNotFoundException {
       when(gameService.getCurrentGameOf(httpSession)).thenReturn(game);
 
-      String page = scoreController.getCurrentGameScore(model, httpSession);
+      String page = highscoreController.getCurrentGameScore(model, httpSession);
 
       assertEquals("score", page);
    }

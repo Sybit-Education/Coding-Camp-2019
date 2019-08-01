@@ -2,32 +2,28 @@ package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.objects.Game;
 import de.sybit.codingcamp2019.objects.User;
-import de.sybit.codingcamp2019.repository.ScoreRepository;
+import de.sybit.codingcamp2019.repository.HighscoreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
 @Service
-public class ScoreServiceImpl implements ScoreService {
+public class HighscoreServiceImpl implements HighscoreService {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(ScoreServiceImpl.class);
-  
+   private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreServiceImpl.class);
+
    @Autowired
-   private ScoreRepository scoreRepository;
+   private HighscoreRepository highscoreRepository;
 
 
    @Override
    public double gameScore(Game game, int amountOfColor) {
       LOGGER.debug("--> gameScore");
       double gameScore = 0;
-      
+
       //TODO
-      
+
       LOGGER.debug("<-- gameScore");
       return gameScore;
 
@@ -36,12 +32,12 @@ public class ScoreServiceImpl implements ScoreService {
    @Override
    public double gameSessionHighScore(User user, int amountOfColor) {
       LOGGER.debug("--> gameSessionHighScore");
-     
+
 
       double gameSessionHighScore = 0;
       //TODO
 
- 
+
       LOGGER.debug("<-- gameSessionHighScore");
       return gameSessionHighScore;
    }
