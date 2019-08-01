@@ -95,7 +95,7 @@ public class GameServiceImpl implements GameService {
          attemptCount++;
 
          gameStateEnum = GameStateEnum.WON;
-         if (attemptCount == MAX_TRIES) {
+         if (attemptCount >= MAX_TRIES) {
             gameStateEnum = GameStateEnum.LOOSE;
          } else {
             for (int i = 0; i < 4; i++) {
