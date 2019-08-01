@@ -86,7 +86,7 @@ public class GameServiceImpl implements GameService {
    @Override
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
-      Game game = null;
+      Game game;
       GameStateEnum gameStateEnum;
       try {
          game = getCurrentGameOf(session);
@@ -98,7 +98,7 @@ public class GameServiceImpl implements GameService {
          if (attemptCount == MAX_TRIES) {
             gameStateEnum = GameStateEnum.LOOSE;
          } else {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
                   gameStateEnum = GameStateEnum.PLAYING;
                }
