@@ -270,6 +270,36 @@ body {
 	text-decoration: none;
 }
 
+.ad2hs-prompt {
+    background-color: rgb(59, 134, 196); /* Blue */
+    border: none;
+    display: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 1rem 1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - 32px);
+  }
+
+.ios-prompt {
+    background-color: #fcfcfc;
+    border: 1px solid #666;
+    display: none;
+    padding: 0.8rem 1rem 0 0.5rem;
+    text-decoration: none;
+    font-size: 16px;
+    color: #555;
+    position: absolute;
+    margin: 0 auto 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0;
+  }
+
 .text {
 
 color: white;
