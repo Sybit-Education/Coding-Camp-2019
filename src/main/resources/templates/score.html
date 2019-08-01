@@ -3,6 +3,7 @@
 <head th:replace="include/dependencies :: dependencies">
 </head>
 <body>
+<main role="main" class="container  container-opaque">
     <div th:replace="include/navigationbar :: navigationbar"></div>
     <div class="score_main">
         <h1 class="score_highscore" th:text="${currentGameScore}"></h1>
@@ -11,6 +12,7 @@
         <div th:if="${error}" class="score_win_loose score_error">Es ist ein Fehler aufgetreten</div>
         <a class="score_restart" href="/restart"> Neustart</a>
     </div>
-    <div th:replace="include/footer :: footer"></div>
+</main>
+<div th:replace="include/footer :: footer"></div>
 </body>
 </html>
