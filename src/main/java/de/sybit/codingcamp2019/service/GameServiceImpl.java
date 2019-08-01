@@ -1,6 +1,5 @@
 package de.sybit.codingcamp2019.service;
 
-import de.sybit.codingcamp2019.controller.HomeController;
 import de.sybit.codingcamp2019.exception.GameNotFoundException;
 import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.repository.GameRepository;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +19,6 @@ public class GameServiceImpl implements GameService {
 
    public static final int MAX_TRIES = 12;
 
-   private List<RowObject> rowObjectList = new ArrayList<>();
    @Autowired
    private GameRepository gameRepository;
 
@@ -30,7 +26,6 @@ public class GameServiceImpl implements GameService {
    private ColorService colorService;
 
    private static final Logger LOGGER = LoggerFactory.getLogger(GameServiceImpl.class);
-
 
    @Override
    public Game checkExistingGameForSession(HttpSession session) {
@@ -83,6 +78,7 @@ public class GameServiceImpl implements GameService {
       pinPlacement.setColors(solution);
       newGame.setPinSolution(pinPlacement);
       session.setAttribute(SessionKeys.SESSION_GAME.toString(), newGame);
+
       LOGGER.debug("<-- createGameFor");
       return newGame;
    }
@@ -93,24 +89,24 @@ public class GameServiceImpl implements GameService {
       Game game = null;
       try {
          game = getCurrentGameOf(session);
-         PinPlacement pinSolution = game.getPinSolution();
+         PinPlacement pinPlacementSolution = game.getPinSolution();
          int attemptCount = game.getAttemptCount();
          attemptCount ++;
          game.setStatus(GameStateEnum.WON);
          if (attemptCount == MAX_TRIES){
             game.setStatus(GameStateEnum.LOOSE);
          } else {
-            for (int a = 0; a < 3; a ++) {
-               if (!pinSolution.getColors().get(a).equals(currentPinPlacement.getColors().get(a))) {
+            for (int i = 0; i < 3; i++) {
+               if (!pinPlacementSolution.getColors().get(i).equals(currentPinPlacement.getColors().get(i))) {
                   game.setStatus(GameStateEnum.PLAYING);
                }
             }
          }
          game.setAttemptCount(attemptCount);
-      } catch (GameNotFoundException e) {
-         LOGGER.error("error 404 game not found");
       }
-
+      catch(GameNotFoundException e){
+         LOGGER.debug("No Game found", e);
+      }
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
    }

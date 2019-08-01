@@ -4,6 +4,8 @@ import de.sybit.codingcamp2019.objects.GameStateEnum;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.ResponseObject;
 import de.sybit.codingcamp2019.objects.RowObject;
+import de.sybit.codingcamp2019.exception.GameNotFoundException;
+import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
@@ -71,6 +73,18 @@ public class HomeController {
          modelAndView.addObject("buttonDisable", true);
       }
       modelAndView.setViewName("index");
+      GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
+      if (gameState.equals(GameStateEnum.WON)) {
+         Game game = null;
+         try {
+            game = gameService.getCurrentGameOf(session);
+            PinPlacement pinPlacementSolution = game.getPinSolution();
+            modelAndView.addObject("solution", pinPlacementSolution);
+         }
+         catch (GameNotFoundException e){
+            LOGGER.debug("No Game found", e);
+         }
+      }
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
