@@ -10,11 +10,10 @@
 <main class="container wrapper">
     <div class="lösung-container">
         <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <div class="lösung"><p class="p-lösung">?</p></div>
+            <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
     <div class="play-ground">
-
         <div th:each="i: ${#numbers.sequence(0, 11)}">
             <div class="field-row" id="'row' + ${i}">
                 <div class="color-box">

@@ -82,9 +82,17 @@ public class GameServiceImpl implements GameService {
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
       Game game = null;
+      try {
+         game = getCurrentGameOf(session);
+         PinPlacement pinPlacementSolution = game.getPinSolution();
+         if (pinPlacementSolution ==  currentPinPlacement){
+            game.setStatus(GameStateEnum.WON);
 
-//TODO
+         }
+      }
+      catch(GameNotFoundException e){
 
+      }
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
    }

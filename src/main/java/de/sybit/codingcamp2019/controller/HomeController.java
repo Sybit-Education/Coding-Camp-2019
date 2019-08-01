@@ -1,9 +1,7 @@
 package de.sybit.codingcamp2019.controller;
 
-import de.sybit.codingcamp2019.objects.Game;
-import de.sybit.codingcamp2019.objects.PinPlacement;
-import de.sybit.codingcamp2019.objects.ResponseObject;
-import de.sybit.codingcamp2019.objects.RowObject;
+import de.sybit.codingcamp2019.exception.GameNotFoundException;
+import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
@@ -54,8 +52,21 @@ public class HomeController {
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
-      addColorPosition(pinPlacement, responseObject);
+      //addColorPosition(pinPlacement, responseObject);
       modelAndView.setViewName("index");
+      //GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
+      GameStateEnum gameState = GameStateEnum.WON;
+      if (gameState.equals(GameStateEnum.WON)) {
+         Game game = null;
+         try {
+            game = gameService.getCurrentGameOf(session);
+            PinPlacement pinPlacementSolution = game.getPinSolution();
+            modelAndView.addObject("solution", pinPlacementSolution);
+         }
+         catch (GameNotFoundException e){
+
+         }
+      }
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
