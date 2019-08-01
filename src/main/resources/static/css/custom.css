@@ -39,29 +39,31 @@ body {
 	height: calc(100vh - 116px);
 	margin-top: 56px;
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: 1fr auto;
 	grid-row-gap: 2%;
 }
 
-.play-ground {
+.playground-container {
 	grid-row: 1;
-	margin-top: 80px;
-	overflow-y: scroll;
-	border-bottom: 5px solid black;
+	overflow: auto;
 }
+
+.play-ground {
+	width: 100%;
+}
+
+
 
 .field-row {
 	width: 90%;
 	height: 80px;
 	margin: 0 5% 5% 5%;
-	display: grid;
-	grid-template-columns: 7.5fr 2.5fr;
-	grid-column-gap: 5%;
 }
 
 .color-pin-container {
-	grid-column: 1;
 	background-color: rgba(255,255,255,0.5);
+	width: calc(75%);
+	height: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 
@@ -71,18 +73,18 @@ body {
 	width: 40px;
 	height: 40px;
 	margin: 20px auto;
-	border-radius: 100%;
-	background-color: black;
+	border-radius: 50%;
 
 }
 
 .feedback-container {
-	grid-column: 2;
+	width: 20%;
+	height: 80px;
+	margin-left: 5%;
 	background-color: rgba(255,255,255,0.5);
 	display: grid;
 	grid-template-rows: repeat(2,1fr);
 	grid-template-columns: repeat(2,1fr);
-	height: 80px;
 }
 
 .feedback-pin {
@@ -139,9 +141,10 @@ body {
 }
 
 .color-select{
-	height: 130px;
-	margin-bottom: 30px;
+	height: 160px;
+	padding: 20px 0;
 	grid-row: 3;
+	border-top: 5px solid black;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: 1fr auto;

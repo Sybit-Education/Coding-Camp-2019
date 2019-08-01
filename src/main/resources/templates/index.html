@@ -14,20 +14,23 @@
             <div class="lösung"><p class="p-lösung">?</p></div>
         </div>
     </div>
-    <div class="play-ground">
-        <div th:each="i: ${#numbers.sequence(0, 11)}">
-            <div class="field-row" id="'row' + ${i}">
-                <div class="color-pin-container">
-                    <div th:each="i: ${#numbers.sequence(0, 3)}">
-                    </div>
-                </div>
-                <input type="hidden" th:value="${correctColors}" id="getColors"/>
-                <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
-                <div class="feedback-container" th:id="'feedback-container-' +${i}">
+    <div class="playground-container">
+        <table class="play-ground">
+            <th:block>
+                <tr class="row field-row" th:each="colorObject : ${feedback}">
+                    <td class="color-pin-container">
+                        <div th:each="b : ${#numbers.sequence(0,3)}" class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
-                </div>
-            </div>
-        </div>
+                        </div>
+                    </td>
+                    <td class="feedback-container">
+                        <input type="hidden" th:value="${correctColors}" id="getColors"/>
+                        <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
+                    </td>
+                </tr>
+            </th:block>
+
+        </table>
     </div>
     <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
         <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
@@ -54,7 +57,7 @@
     </script>
 
     <script>
-        var attempt = 0;
+        var attempt = document.getElementsByClassName('field-row').length -1;
         function createFbPins(row) {
             var correctColors = $("#getColors").val();
             var correctPositions = $("#getPositions").val();
@@ -74,6 +77,7 @@
                 pinRed.classList.add('pin-red');
             }
         }
+
             createFbPins(attempt);
     </script>
 </body>
