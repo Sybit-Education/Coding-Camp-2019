@@ -6,7 +6,6 @@ import de.sybit.codingcamp2019.service.ColorService;
 import de.sybit.codingcamp2019.service.FeedbackService;
 import de.sybit.codingcamp2019.service.GameService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -14,13 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-
 import java.util.Collections;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class HomeControllerTest {
 
@@ -70,7 +68,6 @@ public class HomeControllerTest {
       assertEquals("redirect:/", redirectValue);
    }
 
-   @Ignore
    @Test
    public void newGame_returnIndexPage() {
       when(colorService.getAllPossibleColorsForPicker()).thenReturn(Collections.singletonList(colorSelectionObject));
@@ -81,7 +78,6 @@ public class HomeControllerTest {
       assertEquals("index", page);
    }
 
-   @Ignore
    @Test
    public void attempt_gameStateIsPlaying_setCorrectObjects() {
       when(feedbackService.getFeedbackFor(httpSession, pinPlacement)).thenReturn(responseObject);
@@ -90,34 +86,19 @@ public class HomeControllerTest {
 
       homeController.attempt(httpSession, pinPlacement, modelAndView);
 
-      verify(modelAndView).addObject("attemptCount", gameService.checkExistingGameForSession(httpSession).getAttemptCount());
       verify(modelAndView).addObject("correctColors", responseObject.getCorrectColors());
       verify(modelAndView).addObject("correctPositions", responseObject.getCorrectPositions());
    }
 
-   @Ignore
    @Test
-   public void attempt_gameStateIsWon_setCorrectObjects() throws GameNotFoundException {
-      when(feedbackService.getFeedbackFor(httpSession, pinPlacement)).thenReturn(responseObject);
-      when(gameService.checkGameStatus(httpSession, pinPlacement)).thenReturn(GameStateEnum.WON);
-      when(gameService.getCurrentGameOf(httpSession)).thenReturn(game);
-
-      homeController.attempt(httpSession, pinPlacement, modelAndView);
-
-      verify(modelAndView).addObject("pinSolution", game.getPinSolution());
-      verify(modelAndView).addObject("successfullEnd", true);
-   }
-
-   @Ignore
-   @Test
-   public void attempt_gameIsLost_setCorrectObjects() throws GameNotFoundException {
+   public void attempt_statusIsNotPlayingAnymore_setCorrectObjects() throws GameNotFoundException {
       when(feedbackService.getFeedbackFor(httpSession, pinPlacement)).thenReturn(responseObject);
       when(gameService.checkGameStatus(httpSession, pinPlacement)).thenReturn(GameStateEnum.LOOSE);
       when(gameService.getCurrentGameOf(httpSession)).thenReturn(game);
 
       homeController.attempt(httpSession, pinPlacement, modelAndView);
 
-      verify(modelAndView).addObject("pinSolution", game.getPinSolution());
-      verify(modelAndView).addObject("successfullEnd", false);
+      verify(modelAndView).addObject("solution", game.getPinSolution());
+      verify(modelAndView).addObject("buttonDisable", true);
    }
 }
