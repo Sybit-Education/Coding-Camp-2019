@@ -103,9 +103,7 @@ public class GameServiceImpl implements GameService {
    public void restartGame(HttpSession session) {
       LOGGER.debug("--> restartGame");
 
-      createGameFor(session);
-
-      //TODO
+      session.removeAttribute(SessionKeys.SESSION_GAME.toString());
       LOGGER.debug("<-- restartGame");
    }
 
