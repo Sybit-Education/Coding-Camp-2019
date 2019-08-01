@@ -54,6 +54,7 @@ public class HomeController {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
       addColorPosition(pinPlacement, responseObject);
+      modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       modelAndView.addObject("feedback", rowObjectList);
       modelAndView.addObject("correctColors", responseObject.getCorrectColors());
       modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
