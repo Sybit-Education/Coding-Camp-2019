@@ -23,6 +23,7 @@ public class Game implements Serializable {
    private PinPlacement pinSolution;
    private LocalDateTime startTime;
    private LocalDateTime endTime;
+   private int score;
 
    @ManyToOne
    @JoinColumn
@@ -84,5 +85,7 @@ public class Game implements Serializable {
       this.status = status;
    }
 
-   
+
+
+
 }
