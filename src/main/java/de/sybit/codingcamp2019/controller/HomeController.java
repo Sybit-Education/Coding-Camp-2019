@@ -1,5 +1,6 @@
 package de.sybit.codingcamp2019.controller;
 
+import de.sybit.codingcamp2019.objects.GameStateEnum;
 import de.sybit.codingcamp2019.objects.PinPlacement;
 import de.sybit.codingcamp2019.objects.ResponseObject;
 import de.sybit.codingcamp2019.objects.RowObject;
@@ -19,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+
+import static de.sybit.codingcamp2019.objects.GameStateEnum.PLAYING;
+import static javafx.scene.input.KeyCode.PLAY;
 
 
 @Controller
@@ -53,7 +57,8 @@ public class HomeController {
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
-      if (checkMaxAmounts(12)) {
+      GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
+      if (gameState.equals(PLAYING)) {
          addColorPosition(pinPlacement, responseObject);
       } else {
          modelAndView.addObject("buttonDisable", true);
@@ -77,6 +82,7 @@ public class HomeController {
       if (rowObjectList.size() <= amount) {
          reached = true;
       }
+
       LOGGER.debug("<-- checkMaxAmounts");
       return reached;
    }

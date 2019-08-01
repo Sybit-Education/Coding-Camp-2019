@@ -1,12 +1,9 @@
 package de.sybit.codingcamp2019.service;
 
+import de.sybit.codingcamp2019.controller.HomeController;
 import de.sybit.codingcamp2019.exception.GameNotFoundException;
-import de.sybit.codingcamp2019.objects.Game;
-import de.sybit.codingcamp2019.objects.GameStateEnum;
-import de.sybit.codingcamp2019.objects.PinPlacement;
-import de.sybit.codingcamp2019.objects.User;
+import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.repository.GameRepository;
-import de.sybit.codingcamp2019.objects.SessionKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +12,16 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService {
 
-   public static final int MAX_TRIES = 10;
+   public static final int MAX_TRIES = 12;
 
+   private List<RowObject> rowObjectList = new ArrayList<>();
    @Autowired
    private GameRepository gameRepository;
 
@@ -82,8 +81,25 @@ public class GameServiceImpl implements GameService {
    public GameStateEnum checkGameStatus(@NotNull HttpSession session, @NotNull PinPlacement currentPinPlacement) {
       LOGGER.debug("--> checkGameStatus");
       Game game = null;
-
-//TODO
+      try {
+         game = getCurrentGameOf(session);
+         PinPlacement pinSolution = game.getPinSolution();
+         int attemptCount = game.getAttemptCount();
+         attemptCount ++;
+         game.setStatus(GameStateEnum.WON);
+         if (attemptCount == MAX_TRIES){
+            game.setStatus(GameStateEnum.LOOSE);
+         } else {
+            for (int a = 0; a < 3; a ++) {
+               if (!pinSolution.getColors().get(a).equals(currentPinPlacement.getColors().get(a))) {
+                  game.setStatus(GameStateEnum.PLAYING);
+               }
+            }
+         }
+         game.setAttemptCount(attemptCount);
+      } catch (GameNotFoundException e) {
+         LOGGER.error("error 404 game not found");
+      }
 
       LOGGER.debug("<-- checkGameStatus");
       return game.getStatus();
