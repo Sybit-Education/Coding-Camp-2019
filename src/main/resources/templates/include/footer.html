@@ -1,22 +1,11 @@
 <footer th:fragment="footer" class="footer fixed-bottom" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
-        Projekt des Sybit Coding Camp 2019.
+        Projekt des <a href="//coding-camp.sybit.de">Sybit Coding Camp</a> 2019.
         <a href="https://www.sybit.de/impressum/">Impressum</a>
         | <a href="http://coding-camp.sybit.de/code-of-conduct-de.html">Verhaltenskodex</a>
         | <a href="https://www.sybit.de/datenschutz/">Datenschutz</a>
         </p>
     </div>
-    <script>
-        if ('serviceWorker' in navigator) {
-            console.log("Will the service worker register?");
-            navigator.serviceWorker.register('service-worker.js')
-                .then(function(reg){
-                    console.log("Yes, it did.");
-                }).catch(function(err) {
-                console.log("No it didn't. This happened: ", err)
-            });
-        }
 
-    </script>
 </footer>
 
