@@ -30,18 +30,18 @@
             <th:block>
                 <tr th:each="feedbackObject : ${feedback}">
                     <td th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <div class="feedback-pin-container" th:if="${feedback.value[0] == 0} or ${feedback.value[1] == 0}">
-                        </div>
-                        <div class="feedback-pin-container" th:unless="${feedback.value[0] == 0} or ${feedback.value[1] == 0}">
-                            <div th:each="p : ${#numbers.sequence(0, feedback.value[0])}">
-                                <div class="feedback-pin pin-red"></div>
+                        <div class="feedback-pin-container">
+                            <div th:each="r : ${#numbers.sequence(0, feedback.value[0])}">
+                                <div  th:if="${r > 0}">
+                                    <div class="feedback-pin pin-red"></div>
+                                </div>
                             </div>
-                            <div th:each="p : ${#numbers.sequence(0, feedback.value[1])}">
-                                <div class="feedback-pin"></div>
+                            <div th:each="w : ${#numbers.sequence(0, feedback.value[1])}" >
+                                <div th:if="${w > 0}">
+                                    <div class="feedback-pin" ></div>
+                                </div>
                             </div>
                         </div>
-                        <!--<p>Position: <span th:text="${feedback.value[0]}"></span></p>
-                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>-->
                     </td>
                 </tr>
             </th:block>
