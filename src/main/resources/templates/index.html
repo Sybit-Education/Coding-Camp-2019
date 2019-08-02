@@ -29,10 +29,18 @@
         </table>
         <table class="feedback-container">
             <th:block>
-                <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
-                    <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <p>Pos: <span th:text="${feedback.value[0]}"></span></p>
-                        <p>Far: <span th:text="${feedback.value[1]}"></span></p>
+                <tr th:each="feedbackObject : ${feedback}">
+                    <td th:each="feedback : ${feedbackObject.getFeedback()}">
+                        <div class="feedback-pin-container">
+                            <div th:each="r : ${#numbers.sequence(0, feedback.value[0])}" th:if="${r > 0}">
+                                <div class="feedback-pin pin-red">
+                                </div>
+                            </div>
+                            <div th:each="w : ${#numbers.sequence(0, feedback.value[1])}" th:if="${w > 0}">
+                                <div class="feedback-pin">
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </th:block>
