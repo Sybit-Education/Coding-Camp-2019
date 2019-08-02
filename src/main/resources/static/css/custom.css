@@ -1,11 +1,17 @@
 body {
 	height: calc(100vh - 60px);
+	width: 100%;
 	margin: 0;
 	background-size: cover;
-	width: 100%;
 	background-image: url("../images/background.jpg");
 }
 
+
+.container-opaque {
+	background-color: rgba(255,255,255,0.5);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
 .footer {
    	/* Set the fixed height of the footer here */
    	height: 50px;
@@ -53,7 +59,7 @@ body {
 .field-row {
 	width: 90%;
 	height: 80px;
-	margin: 0 5% 5% 5%;
+	margin: 0 5% 5% 0;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
 	grid-column-gap: 5%;
@@ -139,11 +145,10 @@ body {
 }
 
 .color-select{
-	height: 130px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	grid-row: 3;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	grid-template-rows: 1fr auto;
 }
 
@@ -183,10 +188,6 @@ body {
 	background-color: #c3c3c3  !important;
 }
 
-.ok-btn-container {
-	grid-row: 2;
-	grid-column: 1 / 5;
-}
 
 .ok-btn {
 	width: 80%;
@@ -245,18 +246,13 @@ body {
 }
 
 .pageHeading{
-    margin-top: 100px;
 	color: white;
-	font-family: Verdana;
-	font-size: 45px;
 }
 
 .pageContent {
-    font-family: Verdana;
     color: white;
-    font-size: 25px;
+    font-size: 1.2rem;
     margin-bottom: 50px;
-    margin-top: 100px;
 }
 
 .customLink{
@@ -267,4 +263,44 @@ body {
 .customLink:hover {
 	color: black;
 	text-decoration: none;
+}
+
+.ad2hs-prompt {
+    background-color: rgb(59, 134, 196); /* Blue */
+    border: none;
+    display: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 1rem 1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(100% - 32px);
+  }
+
+.ios-prompt {
+    background-color: #fcfcfc;
+    border: 1px solid #666;
+    display: none;
+    padding: 0.8rem 1rem 0 0.5rem;
+    text-decoration: none;
+    font-size: 16px;
+    color: #555;
+    position: absolute;
+    margin: 0 auto 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0;
+  }
+
+.text {
+
+color: white;
+
+}
+.red {
+color: black;
+
 }
