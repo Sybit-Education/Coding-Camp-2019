@@ -5,15 +5,15 @@ const CACHE_NAME = 'static-cache-v1';
 
 // Add list of files to cache here.
 const FILES_TO_CACHE = [
-	'/js/bootstrap.bundle.min.js',
-	'/js/bootstrap-colorselector.min.js',
-	'/js/jquery.min.js',
+	'/mastermind/js/bootstrap.bundle.min.js',
+	'/mastermind/js/bootstrap-colorselector.min.js',
+	'/mastermind/js/jquery.min.js',
 
-	'/images/background.jpg',
-	'/images/logo.png',
+	'/mastermind/images/background.jpg',
+	'/mastermind/images/logo.png',
 
-	'/css/bootstrap.min.css',
-	'/css/bootstrap-colorselector.min.css'
+	'/mastermind/css/bootstrap.min.css',
+	'/mastermind/css/bootstrap-colorselector.min.css'
 ];
 
 self.addEventListener('install', (evt) => {

@@ -35,7 +35,8 @@ public class HighscoreController {
       Game game = (Game) httpSession.getAttribute(SessionKeys.SESSION_GAME.toString());
       Highscore highscore =highscoreService.gameSessionHighScore(game.getUser());
       modelAndView.addObject("highscore", highscore);
-      modelAndView.setView("leaderboard");
+      modelAndView.addObject("scores", highscoreService.getHighscores(25));
+      modelAndView.setViewName("leaderboard");
 
       LOGGER.debug("<-- getCurrentGameScore");
       return modelAndView;

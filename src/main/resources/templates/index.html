@@ -11,13 +11,14 @@
 <main class="container wrapper">
     <div class="lösung-container">
         <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
+            <div class="lösung" th:id="'00' + ${i}"
+                 th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
-                <tr class="row field-row" th:each="colorObject : ${feedback}">
+                <tr class="field-row" th:each="colorObject : ${feedback}">
                     <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
                         <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
@@ -28,22 +29,30 @@
         </table>
         <table class="feedback-container">
             <th:block>
-                <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
-                    <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <p>Position: <span th:text="${feedback.value[0]}"></span></p>
-                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>
+                <tr th:each="feedbackObject : ${feedback}">
+                    <td th:each="feedback : ${feedbackObject.getFeedback()}">
+                        <div class="feedback-pin-container">
+                            <div th:each="r : ${#numbers.sequence(0, feedback.value[0])}" th:if="${r > 0}">
+                                <div class="feedback-pin pin-red">
+                                </div>
+                            </div>
+                            <div th:each="w : ${#numbers.sequence(0, feedback.value[1])}" th:if="${w > 0}">
+                                <div class="feedback-pin">
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </th:block>
         </table>
     </div>
-    <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
+    <form class="color-select" action="#" th:object="${pinPlacement}" method="post">
         <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
 
-                <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
-                    <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
-                            th:attr="data-color=${color.colorHex}"></option>
-                </select>
+            <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
+                <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
+                        th:attr="data-color=${color.colorHex}"></option>
+            </select>
         </div>
 
         <div></div>
@@ -52,25 +61,25 @@
     </form>
 
 </main>
-    <div th:replace="include/footer :: footer"></div>
+<div th:replace="include/footer :: footer"></div>
 
-    <script>
+<script>
 
-    $('.colorSelector').colorselector().on('change',function() {
-        var color=$(this).find(':selected').attr('data-color');
+    $('.colorSelector').colorselector().on('change', function () {
+        var color = $(this).find(':selected').attr('data-color');
         $(this).parent().closest('td').css('background', color);
-        $(this).parent().closest('td').data("value",color);
+        $(this).parent().closest('td').data("value", color);
     });
 
     //register service worker
     if ('serviceWorker' in navigator) {
         console.log("Will the service worker register?");
-        navigator.serviceWorker.register('./service-worker.js')
-            .then(function(reg){
+        navigator.serviceWorker.register('/mastermind/service-worker.js')
+            .then(function (reg) {
                 console.log("Yes, it did.");
-            }).catch(function(err) {
-                console.log("No it didn't. This happened: ", err)
-            });
+            }).catch(function (err) {
+            console.log("No it didn't. This happened: ", err)
+        });
     }
 </script>
 </body>
