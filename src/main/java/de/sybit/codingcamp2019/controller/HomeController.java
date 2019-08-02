@@ -74,6 +74,8 @@ public class HomeController {
             modelAndView.addObject("buttonDisable", true);
          } catch (GameNotFoundException e) {
             LOGGER.debug("No Game found", e);
+            modelAndView.setViewName("redirect:/");
+            return  modelAndView;
          }
       }
       modelAndView.setViewName("index");

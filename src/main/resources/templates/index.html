@@ -17,7 +17,7 @@
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
-                <tr class="row field-row" th:each="colorObject : ${feedback}">
+                <tr class="field-row" th:each="colorObject : ${feedback}">
                     <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
                         <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
@@ -65,29 +65,6 @@
     <div th:replace="include/footer :: footer"></div>
 
     <script>
-        /*var rows = document.getElementsByClassName('feedback-pin-container');
-        var numRows = rows.length -1;
-        function createFbPins() {
-            var correctColors = $("#getColors").val();
-            var correctPositions = $("#getPositions").val();
-            var container = rows[numRows];
-            console.log(container, numRows);
-            console.log(correctColors,correctPositions);
-                for(let i = 0; i< correctColors; i++) {
-                    let pin = document.createElement('div');
-                    container.appendChild(pin);
-                    pin.classList.add('feedback-pin');
-
-            }
-            for (let j = 0;j<correctPositions; j++) {
-                let pinRed = document.createElement('div');
-                container.appendChild(pinRed);
-                pinRed.classList.add('feedback-pin');
-                pinRed.classList.add('pin-red');
-            }
-        }
-        createFbPins();*/
-
 
     $('.colorSelector').colorselector().on('change',function() {
         var color=$(this).find(':selected').attr('data-color');
