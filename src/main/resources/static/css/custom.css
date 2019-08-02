@@ -54,6 +54,8 @@ body {
 	margin-top: 80px;
 	overflow-y: scroll;
 	border-bottom: 5px solid black;
+	display: grid;
+	grid-template-columns: 7.5fr 2.5fr;
 }
 
 .field-row {
@@ -61,8 +63,6 @@ body {
 	height: 80px;
 	margin: 0 5% 5% 0;
 	display: grid;
-	grid-template-columns: 7.5fr 2.5fr;
-	grid-column-gap: 5%;
 }
 
 .play-ground {
@@ -73,7 +73,6 @@ body {
 .feedback-container {
 	grid-column: 2;
 	margin-top: 80px;
-	background-color: rgba(255,255,255,0.5);
 }
 
 
@@ -81,13 +80,9 @@ body {
 .field-row {
 	background-color: rgba(255,255,255,0.5);
 	height: 80px;
-	margin-bottom: 5%;
+	margin-bottom: 5vh;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-}
-
-.color-pin-container {
-
 }
 
 .color-pin {
@@ -98,13 +93,13 @@ body {
 
 }
 
-.feedback-container {
-	grid-column: 2;
+.feedback-pin-container {
+	height: 80px;
+	margin-bottom: 5vh;
 	background-color: rgba(255,255,255,0.5);
 	display: grid;
-	grid-template-rows: repeat(2,1fr);
-	grid-template-columns: repeat(2,1fr);
-	height: 80px;
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 }
 
 .feedback-pin {

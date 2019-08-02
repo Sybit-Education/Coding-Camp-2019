@@ -28,12 +28,10 @@
         </table>
         <table class="feedback-container">
             <th:block>
-                <tr class="field-row" th:each="feedbackObject : ${feedback}">
+                <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
                     <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <div class="feedback-pin">
-                            <p><span th:text="${feedback.value[0]}"></span></p>
-                            <p><span th:text="${feedback.value[1]}"></span></p>
-                        </div>
+                            <p>Richtige Farben: <span th:text="${feedback.value[0]}"></span></p>
+                            <p>Richtige Position: <span th:text="${feedback.value[1]}"></span></p>
                     </td>
                 </tr>
             </th:block>
