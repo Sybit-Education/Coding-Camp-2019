@@ -1,7 +1,9 @@
 package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.Highscore;
 import de.sybit.codingcamp2019.objects.User;
+import de.sybit.codingcamp2019.repository.HighscoreRepository;
 import de.sybit.codingcamp2019.repository.ScoreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,15 +15,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
-public class ScoreServiceImpl implements ScoreService {
+public class HighscoreServiceImpl implements HighscoreService {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(ScoreServiceImpl.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreServiceImpl.class);
+
+   @Autowired
+   private HighscoreRepository highscoreRepository;
 
    @Autowired
    private ScoreRepository scoreRepository;
 
-   @Autowired
-   private GameService gameService;
 
    @Override
    public int gameScore(Game game) {
@@ -43,19 +46,19 @@ public class ScoreServiceImpl implements ScoreService {
    }
 
    @Override
-   public int gameSessionHighScore(User user) {
-      LOGGER.debug("--> gameSessionHighScore");
-      double gameScoreSum = 0;
-      double gameSessionHighScore = 0;
-      List<Game> gameList = scoreRepository.findAllByUser(user);
-      for(Game currentGame : gameList){
-         double score = gameScore(currentGame);
-         gameScoreSum = gameScoreSum + score;
-      }
-      gameSessionHighScore = gameScoreSum * (gameList.size() * 0.5);
-      int gameSessionHighScoreInt = (int) gameSessionHighScore;
-
-      LOGGER.debug("<-- gameSessionHighScore");
-      return gameSessionHighScoreInt;
+   public void gameSessionHighScore(User user) {
+         LOGGER.debug("--> gameSessionHighScore");
+         double gameScoreSum = 0;
+         double gameSessionHighScore = 0;
+         List<Game> gameList = scoreRepository.findAllByUser(user);
+         for(Game currentGame : gameList){
+            double score = gameScore(currentGame);
+            gameScoreSum = gameScoreSum + score;
+         }
+         gameSessionHighScore = gameScoreSum * (gameList.size() * 0.5);
+         String gameSessionHighScoreSt = String.valueOf(gameSessionHighScore);
+         Highscore highscore = new Highscore();
+         highscore.setScore(Long.parseLong(gameSessionHighScoreSt));
+         LOGGER.debug("<-- gameSessionHighScore");
    }
 }

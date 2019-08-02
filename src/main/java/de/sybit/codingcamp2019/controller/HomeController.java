@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,13 @@ public class HomeController {
       model.addAttribute(pinPlacement);
       model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       clearAttempts();
-
+      try {
+         Game game = gameService.getCurrentGameOf(session);
+         game.setStartTime(LocalDateTime.now());
+      }
+       catch (Exception e){
+       LOGGER.debug("No Game found", e);
+      }
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -70,6 +77,7 @@ public class HomeController {
          try {
             Game game = gameService.getCurrentGameOf(session);
             PinPlacement pinPlacementSolution = game.getPinSolution();
+            game.setEndTime(LocalDateTime.now());
             modelAndView.addObject("solution", pinPlacementSolution);
             modelAndView.addObject("buttonDisable", true);
          } catch (GameNotFoundException e) {
@@ -77,7 +85,7 @@ public class HomeController {
          }
       }
       modelAndView.setViewName("index");
-      
+
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
