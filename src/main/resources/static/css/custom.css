@@ -51,7 +51,15 @@ body {
 
 .playground-container {
 	grid-row: 1;
-	overflow: auto;
+	margin-top: 80px;
+	overflow-y: scroll;
+	border-bottom: 5px solid black;
+}
+
+.field-row {
+	width: 90%;
+	height: 80px;
+	margin: 0 5% 5% 0;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
 	grid-column-gap: 5%;
@@ -86,8 +94,17 @@ body {
 	width: 40px;
 	height: 40px;
 	margin: 20px auto;
-	border-radius: 50%;
+	border-radius: 100%;
 
+}
+
+.feedback-container {
+	grid-column: 2;
+	background-color: rgba(255,255,255,0.5);
+	display: grid;
+	grid-template-rows: repeat(2,1fr);
+	grid-template-columns: repeat(2,1fr);
+	height: 80px;
 }
 
 .feedback-pin {
@@ -305,4 +322,22 @@ color: white;
 .red {
 color: black;
 
+}
+
+.dropdown-menu {
+	background-color:#343a40 !important;
+}
+
+.dropdown-colorselector>.dropdown-menu>li {
+	width: 40px;
+	height: 40px;
+}
+.dropdown-colorselector>.dropdown-menu>li>.color-btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 100% !important;
+	border: 2px solid #c3c3c3 !important;
+}
+.dropdown-menu.dropdown-caret:after, .dropdown-menu.dropdown-caret:before {
+	content: none;
 }

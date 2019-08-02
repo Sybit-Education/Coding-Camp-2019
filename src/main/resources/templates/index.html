@@ -5,6 +5,7 @@
 </head>
 <body>
 
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
@@ -47,10 +48,9 @@
                 </select>
         </div>
 
-        <div class="ok-btn-container">
-            <!--<button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>-->
-            <button type="submit" class="btn btn-primary ok-btn">OK</button>
-        </div>
+
+        <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
+
     </form>
 
 </main>
@@ -73,21 +73,32 @@
                     FbContainer.appendChild(pin);
                     pin.classList.add('feedback-pin');
 
-                }
-                for (let j = 0;j<correctPositions; j++) {
-                    let pinRed = document.createElement('div');
-                    FbContainer.appendChild(pinRed);
-                    pinRed.classList.add('feedback-pin');
-                    pinRed.classList.add('pin-red');
-                }
+            }
+            for (let j = 0;j<correctPositions; j++) {
+                let pinRed = document.createElement('div');
+                FbContainer.appendChild(pinRed);
+                pinRed.classList.add('feedback-pin');
+                pinRed.classList.add('pin-red');
+            }
         }
-            createFbPins();*/
+            createFbPins(attempt);*/
 
     $('.colorSelector').colorselector().on('change',function() {
-    var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('td').css('background', color);
-    $(this).parent().closest('td').data("value",color);
+        var color=$(this).find(':selected').attr('data-color');
+        $(this).parent().closest('td').css('background', color);
+        $(this).parent().closest('td').data("value",color);
     });
-    </script>
+
+    //register service worker
+    if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(function(reg){
+                console.log("Yes, it did.");
+            }).catch(function(err) {
+                console.log("No it didn't. This happened: ", err)
+            });
+    }
+</script>
 </body>
 </html>
