@@ -41,11 +41,13 @@ public class HomeController {
    @GetMapping(value = "/")
    public String newGame(Model model, HttpSession session) {
       LOGGER.debug("--> newGame");
+
       gameService.checkExistingGameForSession(session);
       PinPlacement pinPlacement = new PinPlacement();
       model.addAttribute(pinPlacement);
       model.addAttribute("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       clearAttempts();
+
       LOGGER.debug("<-- newGame");
       return "index";
    }
@@ -53,6 +55,7 @@ public class HomeController {
    @PostMapping(value = "/")
    public ModelAndView attempt(HttpSession session, @ModelAttribute PinPlacement pinPlacement, ModelAndView modelAndView) {
       LOGGER.debug("--> attempt");
+
       ResponseObject responseObject = feedbackService.getFeedbackFor(session, pinPlacement);
       addColorPosition(pinPlacement, responseObject);
       modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
@@ -63,17 +66,20 @@ public class HomeController {
          modelAndView.addObject("correctColors", responseObject.getCorrectColors());
          modelAndView.addObject("correctPositions", responseObject.getCorrectPositions());
       } else {
-         Game game;
+
          try {
-            game = gameService.getCurrentGameOf(session);
+            Game game = gameService.getCurrentGameOf(session);
             PinPlacement pinPlacementSolution = game.getPinSolution();
             modelAndView.addObject("solution", pinPlacementSolution);
             modelAndView.addObject("buttonDisable", true);
          } catch (GameNotFoundException e) {
             LOGGER.debug("No Game found", e);
+            modelAndView.setViewName("redirect:/");
+            return  modelAndView;
          }
       }
       modelAndView.setViewName("index");
+      
       LOGGER.debug("<-- attempt");
       return modelAndView;
    }
