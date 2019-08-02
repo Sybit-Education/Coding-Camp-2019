@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -64,6 +62,14 @@ public class GameServiceImpl implements GameService {
    @Override
    public Game createGameFor(@NotNull final HttpSession session) {
       LOGGER.debug("--> createGameFor");
+
+      User user = null;
+      try {
+         user = getCurrentGameOf(session).getUser();
+      } catch (GameNotFoundException e) {
+         e.printStackTrace();
+      }
+
       final Game newGame = new Game();
 
       List<String> colors = colorService.getAmountOfRandomColor(4);
@@ -75,6 +81,12 @@ public class GameServiceImpl implements GameService {
 
       PinPlacement pinPlacement = new PinPlacement();
       pinPlacement.setColors(solution);
+
+      if (user == null){
+         newGame.setUser(new User());
+      }else {
+         newGame.setUser(user);
+      }
 
       newGame.setPinSolution(pinPlacement);
       newGame.setAttemptCount(0);
@@ -108,6 +120,16 @@ public class GameServiceImpl implements GameService {
             } else {
                gameStateEnum = GameStateEnum.LOOSE;
             }
+            Game currentGame = (Game) session.getAttribute(SessionKeys.SESSION_GAME.toString());
+            User user = currentGame.getUser();
+            if (user != null) {
+               List<Game> games = user.getGames();
+               if (games == null){
+                  games = new ArrayList<>();
+               }
+               games.add(getCurrentGameOf(session));
+               user.setGames(games);
+            }
          } else {
             for (int i = 0; i < colors.size(); i++) {
                if (!colors.get(i).equals(currentPinPlacement.getColors().get(i))) {
@@ -127,8 +149,7 @@ public class GameServiceImpl implements GameService {
    @Override
    public void restartGame(HttpSession session) {
       LOGGER.debug("--> restartGame");
-
-      session.removeAttribute(SessionKeys.SESSION_GAME.toString());
+      session.setAttribute(SessionKeys.SESSION_GAME.toString(), createGameFor(session));
       LOGGER.debug("<-- restartGame");
    }
 

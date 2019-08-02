@@ -30,27 +30,37 @@ public class HighscoreServiceImpl implements HighscoreService {
    public int gameScore(Game game) {
       LOGGER.debug("--> gameScore");
       double gameScore = 1000;
-      LocalDateTime startTime = game.getStartTime();
-      LocalDateTime endTime = game.getEndTime();
-      double duration = ChronoUnit.SECONDS.between(startTime, endTime);
+      double duration = getDuration(game);
       double attempt = game.getAttemptCount();
-      if (duration < 3000) {
-         gameScore = gameScore - (duration/3) + ((13 - attempt) * 100);
+
+      if (game.getAttemptCount() < 12){
+         if (duration < 3000) {
+            gameScore = gameScore - (duration/3) + ((13 - attempt) * 100);
+         }
+         else {
+            gameScore = (13 - attempt) * 100;
+         }
+      }else{
+         gameScore = gameScore - 1000;
       }
-      else {
-         gameScore = (13 - attempt) * 100;
-      }
+
       int gameScoreInt = (int) gameScore;
       LOGGER.debug("<-- gameScore");
       return gameScoreInt;
    }
 
+   private double getDuration(Game game) {
+      LocalDateTime startTime = game.getStartTime();
+      LocalDateTime endTime = game.getEndTime();
+      return (double) ChronoUnit.SECONDS.between(startTime, endTime);
+   }
+
    @Override
-   public void gameSessionHighScore(User user) {
+   public Highscore gameSessionHighScore(User user) {
          LOGGER.debug("--> gameSessionHighScore");
          double gameScoreSum = 0;
-         double gameSessionHighScore = 0;
-         List<Game> gameList = scoreRepository.findAllByUser(user);
+         double gameSessionHighScore;
+         List<Game> gameList = user.getGames();
          for(Game currentGame : gameList){
             double score = gameScore(currentGame);
             gameScoreSum = gameScoreSum + score;
@@ -59,6 +69,9 @@ public class HighscoreServiceImpl implements HighscoreService {
          String gameSessionHighScoreSt = String.valueOf(gameSessionHighScore);
          Highscore highscore = new Highscore();
          highscore.setScore(Long.parseLong(gameSessionHighScoreSt));
+         highscore.setUser(user);
+         highscoreRepository.save(highscore);
          LOGGER.debug("<-- gameSessionHighScore");
+         return highscore;
    }
 }

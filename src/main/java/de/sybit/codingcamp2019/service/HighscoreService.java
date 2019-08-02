@@ -1,6 +1,7 @@
 package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.Highscore;
 import de.sybit.codingcamp2019.objects.User;
 
 public interface HighscoreService {
@@ -20,5 +21,5 @@ public interface HighscoreService {
     * @return
     */
 
-   void gameSessionHighScore(User user);
+   Highscore gameSessionHighScore(User user);
 }

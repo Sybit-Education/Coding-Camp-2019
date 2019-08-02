@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "highscore")
@@ -17,9 +16,7 @@ public class Highscore implements Serializable {
 
    private Long score;
 
-   private String user;
-
-   private LocalDateTime timestamp;
+   private User user;
 
    public Long getId() {
       return id;
@@ -37,19 +34,11 @@ public class Highscore implements Serializable {
       this.score = score;
    }
 
-   public String getUser() {
+   public User getUser() {
       return user;
    }
 
-   public void setUser(String user) {
+   public void setUser(User user) {
       this.user = user;
-   }
-
-   public LocalDateTime getTimestamp() {
-      return timestamp;
-   }
-
-   public void setTimestamp(LocalDateTime timestamp) {
-      this.timestamp = timestamp;
    }
 }

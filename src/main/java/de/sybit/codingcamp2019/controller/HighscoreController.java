@@ -1,5 +1,9 @@
 package de.sybit.codingcamp2019.controller;
 
+import de.sybit.codingcamp2019.exception.GameNotFoundException;
+import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.Highscore;
+import de.sybit.codingcamp2019.objects.SessionKeys;
 import de.sybit.codingcamp2019.service.GameService;
 import de.sybit.codingcamp2019.service.HighscoreService;
 import org.slf4j.Logger;
@@ -8,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,11 +29,15 @@ public class HighscoreController {
 
 
    @GetMapping("/highscore")
-   public String getCurrentGameScore(Model model, HttpSession httpSession) {
+   public ModelAndView getCurrentGameScore( ModelAndView modelAndView, HttpSession httpSession) {
       LOGGER.debug("--> getCurrentGameScore");
 
-      highscoreService.gameSessionHighScore();
+      Game game = (Game) httpSession.getAttribute(SessionKeys.SESSION_GAME.toString());
+      Highscore highscore =highscoreService.gameSessionHighScore(game.getUser());
+      modelAndView.addObject("highscore", highscore);
+      modelAndView.setView("leaderboard");
+
       LOGGER.debug("<-- getCurrentGameScore");
-      return "score";
+      return modelAndView;
    }
 }
