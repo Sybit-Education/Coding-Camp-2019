@@ -12,7 +12,7 @@ public interface ScoreService {
     * @return
     */
 
-   double gameScore(Game game);
+   int gameScore(Game game);
 
    /**
     * Returns a gameSessionHighScore
@@ -20,5 +20,5 @@ public interface ScoreService {
     * @return
     */
 
-   double gameSessionHighScore(User user);
+   int gameSessionHighScore(User user);
 }

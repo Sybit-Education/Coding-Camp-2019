@@ -60,14 +60,13 @@ public class ScoreServiceImplTest {
       gameList.add(game3);
 
       return gameList;
-
    }
 
    @Ignore
    @Test
    public void gameScoreTest() {
 
-      LocalDateTime start = (LocalDateTime.of(2019, 4, 18, 10, 5, 20));
+      LocalDateTime start = (LocalDateTime.of(2019, 4, 18, 10, 5, 44));
       LocalDateTime end = (LocalDateTime.of(2019, 4, 18, 10, 12, 44));
       int attemptCount = 7;
 
@@ -75,9 +74,9 @@ public class ScoreServiceImplTest {
       when(game.getEndTime()).thenReturn(end);
       when(game.getAttemptCount()).thenReturn(attemptCount);
 
-      scoreService.gameScore(game, 8);
+      scoreService.gameScore(game);
 
-      Assert.assertEquals(13.99, scoreService.gameScore(game, 8), 0);
+      Assert.assertEquals(1460, scoreService.gameScore(game), 0);
       Assert.assertNotNull(game);
 
    }
@@ -90,9 +89,9 @@ public class ScoreServiceImplTest {
 
       when(scoreRepository.findAllByUser(user)).thenReturn(gameList);
 
-      double gameSessionHighScore = scoreService.gameSessionHighScore(user, 8);
+      int gameSessionHighScore = scoreService.gameSessionHighScore(user);
 
-      Assert.assertEquals(80.21, gameSessionHighScore, 0);
+      Assert.assertEquals(6948, gameSessionHighScore, 0);
 
    }
 }

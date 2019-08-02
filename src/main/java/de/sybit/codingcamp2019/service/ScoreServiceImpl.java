@@ -24,7 +24,7 @@ public class ScoreServiceImpl implements ScoreService {
    private GameService gameService;
 
    @Override
-   public double gameScore(Game game) {
+   public int gameScore(Game game) {
       LOGGER.debug("--> gameScore");
       double gameScore = 1000;
       LocalDateTime startTime = game.getStartTime();
@@ -37,12 +37,13 @@ public class ScoreServiceImpl implements ScoreService {
       else {
          gameScore = (13 - attempt) * 100;
       }
+      int gameScoreInt = (int) gameScore;
       LOGGER.debug("<-- gameScore");
-      return gameScore;
+      return gameScoreInt;
    }
 
    @Override
-   public double gameSessionHighScore(User user) {
+   public int gameSessionHighScore(User user) {
       LOGGER.debug("--> gameSessionHighScore");
       double gameScoreSum = 0;
       double gameSessionHighScore = 0;
@@ -51,9 +52,10 @@ public class ScoreServiceImpl implements ScoreService {
          double score = gameScore(currentGame);
          gameScoreSum = gameScoreSum + score;
       }
-      gameSessionHighScore = gameScoreSum * (gameList.size()/2);
+      gameSessionHighScore = gameScoreSum * (gameList.size() * 0.5);
+      int gameSessionHighScoreInt = (int) gameSessionHighScore;
 
       LOGGER.debug("<-- gameSessionHighScore");
-      return gameSessionHighScore;
+      return gameSessionHighScoreInt;
    }
 }
