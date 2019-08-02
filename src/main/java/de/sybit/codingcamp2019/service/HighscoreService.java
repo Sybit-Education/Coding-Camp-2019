@@ -15,7 +15,7 @@ public interface HighscoreService {
     * @return
     */
 
-   int gameScore(Game game, int amountOfColors);
+   int gameScore(Game game);
 
    /**
     * Returns a gameSessionHighScore

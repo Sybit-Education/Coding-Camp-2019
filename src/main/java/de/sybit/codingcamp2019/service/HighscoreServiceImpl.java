@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -68,9 +67,10 @@ public class HighscoreServiceImpl implements HighscoreService {
             gameScoreSum = gameScoreSum + score;
          }
          gameSessionHighScore = gameScoreSum * (gameList.size() * 0.5);
-         String gameSessionHighScoreSt = String.valueOf(gameSessionHighScore);
+
          Highscore highscore = new Highscore();
-         highscore.setScore(Long.parseLong(gameSessionHighScoreSt));
+
+         highscore.setScore(gameSessionHighScore);
          highscore.setUser(user);
          highscoreRepository.save(highscore);
          LOGGER.debug("<-- gameSessionHighScore");

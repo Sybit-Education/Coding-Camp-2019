@@ -14,7 +14,7 @@ public class Highscore implements Serializable {
    @Column(name = "id", updatable = false, nullable = false)
    private Long id;
 
-   private Long score;
+   private double score;
 
    private User user;
 
@@ -26,11 +26,11 @@ public class Highscore implements Serializable {
       this.id = id;
    }
 
-   public Long getScore() {
+   public double getScore() {
       return score;
    }
 
-   public void setScore(Long score) {
+   public void setScore(double score) {
       this.score = score;
    }
 

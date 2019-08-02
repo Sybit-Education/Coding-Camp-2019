@@ -33,7 +33,7 @@ public class HighscoreController {
       LOGGER.debug("--> getCurrentGameScore");
 
       Game game = (Game) httpSession.getAttribute(SessionKeys.SESSION_GAME.toString());
-      Highscore highscore =highscoreService.gameSessionHighScore(game.getUser());
+      Highscore highscore = highscoreService.gameSessionHighScore(game.getUser());
       modelAndView.addObject("highscore", highscore);
       modelAndView.addObject("scores", highscoreService.getHighscores(25));
       modelAndView.setViewName("leaderboard");
