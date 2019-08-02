@@ -1,30 +1,29 @@
 package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.exception.GameNotFoundException;
-import de.sybit.codingcamp2019.objects.Game;
-import de.sybit.codingcamp2019.objects.GameStateEnum;
-import de.sybit.codingcamp2019.objects.PinPlacement;
-import de.sybit.codingcamp2019.objects.User;
+import de.sybit.codingcamp2019.objects.*;
 import de.sybit.codingcamp2019.repository.GameRepository;
-import de.sybit.codingcamp2019.objects.SessionKeys;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static org.junit.Assert.*;
+import static de.sybit.codingcamp2019.objects.GameStateEnum.LOOSE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class GameServiceImplTest {
+
+   @InjectMocks
+   private GameServiceImpl gameService;
 
    @Mock
    private HttpSession session;
@@ -41,9 +40,6 @@ public class GameServiceImplTest {
    @Mock
    private ColorService colorService;
 
-   @InjectMocks
-   private GameServiceImpl gameService;
-
    @Mock
    private PinPlacement pinPlacement;
 
@@ -52,15 +48,25 @@ public class GameServiceImplTest {
       MockitoAnnotations.initMocks(this);
    }
 
-   @Ignore
    @Test
    public void checkExistingGameForSession_gameDoesNotExistsInSession_createNewGame() {
+      when(colorService.getAmountOfRandomColor(4)).thenReturn(Collections.singletonList(anyString()));
+
       Game game = gameService.checkExistingGameForSession(session);
+
       Assert.assertNotNull(game.getPinSolution());
       verify(session).setAttribute(eq(SessionKeys.SESSION_GAME.toString()), any(Game.class));
    }
 
-   @Ignore
+   @Test
+   public void checkExistingGameForSession_gameExists_getGameOutOfSession() {
+      when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
+
+      Game result = gameService.checkExistingGameForSession(session);
+
+      assertEquals(game, result);
+   }
+
    @Test
    public void checkForExistingGame_gameExistsInSession() {
       game.setAttemptCount(1);
@@ -68,17 +74,17 @@ public class GameServiceImplTest {
       assertEquals(game.getAttemptCount(), gameService.checkExistingGameForSession(session).getAttemptCount());
    }
 
-   @Ignore
    @Test
    public void createGameFor() {
-      ArrayList<String> colorList = getColorList(3);
+      ArrayList<String> colorList = getColorList(4);
       when(colorService.getAmountOfRandomColor(anyInt())).thenReturn(colorList);
+
       Game game = gameService.createGameFor(session);
+
       Assert.assertNotNull(game.getPinSolution());
       verify(session).setAttribute(eq(SessionKeys.SESSION_GAME.toString()), any(Game.class));
    }
 
-   @Ignore
    @Test
    public void createGameFor_WithRandomColors() {
       ArrayList<String> colorList = getColorList(4);
@@ -91,7 +97,6 @@ public class GameServiceImplTest {
       Assert.assertNotNull(pinSolution.getColors().get(3));
    }
 
-   @Ignore
    @Test
    public void getAllGamesOfUser() {
       List<Game> gameList = getGameList(2);
@@ -101,7 +106,6 @@ public class GameServiceImplTest {
 
    }
 
-   @Ignore
    @Test
    public void restartGame_sessionRemoved() {
       gameService.restartGame(session);
@@ -127,15 +131,21 @@ public class GameServiceImplTest {
       assertNull(currentGame);
    }
 
-   @Ignore
    @Test
    public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
+      Map<Integer, String> colors = new HashMap<>();
+      colors.put(0, "#ff0000");
+      colors.put(1, "#00ff00");
+      colors.put(2, "#0000ff");
+      colors.put(3, "#000000");
+
       when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
-      when(game.getAttemptCount()).thenReturn(9);
+      when(game.getAttemptCount()).thenReturn(11);
+      when(game.getPinSolution()).thenReturn(pinPlacement);
+      when(pinPlacement.getColors()).thenReturn(Collections.singletonMap(1, "#ff0000"));
+      GameStateEnum gameStateEnum = gameService.checkGameStatus(session, pinPlacement);
 
-      gameService.checkGameStatus(session, pinPlacement);
-
-      verify(game).setStatus(GameStateEnum.LOOSE);
+      assertEquals(LOOSE, gameStateEnum);
    }
 
    private List<Game> getGameList(int count) {

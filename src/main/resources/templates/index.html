@@ -5,6 +5,7 @@
 </head>
 <body>
 
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
@@ -38,43 +39,54 @@
                 </select>
         </div>
 
-        <div class="ok-btn-container">
-            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
-        </div>
+
+        <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
+
     </form>
 
 </main>
-    <div th:replace="include/footer :: footer"></div>
-    <script>
-    $('.colorSelector').colorselector().on('change',function() {
-    var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('td').css('background', color);
-    $(this).parent().closest('td').data("value",color);
-    });
-    </script>
+<div th:replace="include/footer :: footer"></div>
 
-    <script>
-        var attempt = 0;
-        function createFbPins(row) {
-            var correctColors = $("#getColors").val();
-            var correctPositions = $("#getPositions").val();
-            console.log(correctColors,correctPositions)
+<script>
+    var attempt = 0;
 
-            let FbContainer = document.getElementById(`feedback-container-${row}`);
-            for(let i = 0; i< correctColors; i++) {
-                let pin = document.createElement('div');
-                FbContainer.appendChild(pin);
-                pin.classList.add('feedback-pin');
+    function createFbPins(row) {
+        var correctColors = $("#getColors").val();
+        var correctPositions = $("#getPositions").val();
+        console.log(correctColors,correctPositions)
 
-            }
-            for (let j = 0;j<correctPositions; j++) {
-                let pinRed = document.createElement('div');
-                FbContainer.appendChild(pinRed);
-                pinRed.classList.add('feedback-pin');
-                pinRed.classList.add('pin-red');
-            }
+        var FbContainer = document.getElementById('feedback-container-${row}');
+        for(var i = 0; i< correctColors; i++) {
+            var pin = document.createElement('div');
+            FbContainer.appendChild(pin);
+            pin.classList.add('feedback-pin');
+
         }
-            createFbPins(attempt);
-    </script>
+        for (var j = 0;j<correctPositions; j++) {
+            var pinRed = document.createElement('div');
+            FbContainer.appendChild(pinRed);
+            pinRed.classList.add('feedback-pin');
+            pinRed.classList.add('pin-red');
+        }
+    }
+    createFbPins(attempt);
+
+    $('.colorSelector').colorselector().on('change',function() {
+        var color=$(this).find(':selected').attr('data-color');
+        $(this).parent().closest('td').css('background', color);
+        $(this).parent().closest('td').data("value",color);
+    });
+
+    //register service worker
+    if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(function(reg){
+                console.log("Yes, it did.");
+            }).catch(function(err) {
+                console.log("No it didn't. This happened: ", err)
+            });
+    }
+</script>
 </body>
 </html>
