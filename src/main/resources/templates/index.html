@@ -30,8 +30,8 @@
             <th:block>
                 <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
                     <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <p>Position: <span th:text="${feedback.value[0]}"></span></p>
-                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>
+                        <p>Pos: <span th:text="${feedback.value[0]}"></span></p>
+                        <p>Far: <span th:text="${feedback.value[1]}"></span></p>
                     </td>
                 </tr>
             </th:block>
