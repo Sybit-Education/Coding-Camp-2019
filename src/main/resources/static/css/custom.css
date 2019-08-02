@@ -274,4 +274,6 @@ body {
     font-size: 21px;
     margin-bottom: 50px;
     margin-top: 20px;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
 }

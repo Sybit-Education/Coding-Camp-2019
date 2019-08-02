@@ -7,6 +7,7 @@ import de.sybit.codingcamp2019.repository.HighscoreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class HighscoreServiceImpl implements HighscoreService {
 
       //TODO
 
+
       LOGGER.debug("<-- gameScore");
       return gameScore;
 
@@ -45,5 +47,14 @@ public class HighscoreServiceImpl implements HighscoreService {
 
       LOGGER.debug("<-- gameSessionHighScore");
       return gameSessionHighScore;
+   }
+
+   @Override
+   public List<Highscore> getHighscores(int maxEntries){
+      LOGGER.debug("--> getHighscores: maxEntries={}", maxEntries);
+      List<Highscore> result = highscoreRepository.findAll(Sort.by("score").descending());
+
+      LOGGER.debug("--> getHighscores: {}", result.size());
+      return result;
    }
 }

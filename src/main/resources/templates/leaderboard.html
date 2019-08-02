@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="include/dependencies :: dependencies">
+    <meta charset="UTF-8">
+    <title>Leaderboards</title>
+</head>
+<body>
+<div th:replace="include/navigationbar :: navigationbar"></div>
+<main role="main" class="container">
+    <h1 class="pageHeading">Leaderboard</h1>
+    <table class="leaderboard">
+        <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Points</th>
+        </tr>
+        <tbody>
+        <tr th:each="score, iter: ${scores}">
+            <td><span th:text="${iter.count}"></span></td>
+            <td><span th:text="${score.user}"></span></td>
+            <td><span th:text="${score.score}"></span></td>
+        </tr>
+
+        </tbody>
+
+    </table>
+</main>
+<div th:replace="include/footer :: footer"></div>
+</body>
+</html>

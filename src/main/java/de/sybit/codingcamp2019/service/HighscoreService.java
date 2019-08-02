@@ -1,7 +1,10 @@
 package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.Highscore;
 import de.sybit.codingcamp2019.objects.User;
+
+import java.util.List;
 
 public interface HighscoreService {
 
@@ -21,4 +24,6 @@ public interface HighscoreService {
     */
 
    double gameSessionHighScore(User user, int amountOfColor);
+
+   List<Highscore> getHighscores(int maxEntries);
 }

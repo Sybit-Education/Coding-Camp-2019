@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,13 +28,14 @@ public class HighscoreController {
 
 
    @GetMapping("/highscore")
-   public String getCurrentGameScore(Model model, HttpSession httpSession) {
-
-
+   public ModelAndView getCurrentGameScore(ModelAndView modelAndView, HttpSession httpSession) {
       LOGGER.debug("--> getCurrentGameScore");
 
+      modelAndView.addObject("scores", highscoreService.getHighscores(25));
+      modelAndView.setViewName("leaderboard");
+
       LOGGER.debug("<-- getCurrentGameScore");
-      return "Leaderboard";
+      return modelAndView;
    }
 
 }
