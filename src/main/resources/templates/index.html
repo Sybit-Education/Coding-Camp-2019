@@ -5,6 +5,7 @@
 </head>
 <body>
 
+
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
@@ -43,23 +44,18 @@
 
         <div class="ok-btn-container">
             <!--<button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>-->
-            <button type="submit" class="btn btn-primary ok-btn">OK</button>
+            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
         </div>
+
     </form>
 
 </main>
     <div th:replace="include/footer :: footer"></div>
-    <script>
-    $('.colorSelector').colorselector().on('change',function() {
-    var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('td').css('background', color);
-    $(this).parent().closest('td').data("value",color);
-    });
-    </script>
 
     <script>
         var attempt = document.getElementsByClassName('field-row').length;
         var numRows = $("#feedbackSize").val();
+        var attempt = 0;
         function createFbPins(row) {
             var correctColors = $("#getColors").val();
             var correctPositions = $("#getPositions").val();
@@ -81,6 +77,13 @@
                 }
         }
             createFbPins(numRows);
+            createFbPins(attempt);
+
+    $('.colorSelector').colorselector().on('change',function() {
+    var color=$(this).find(':selected').attr('data-color');
+    $(this).parent().closest('td').css('background', color);
+    $(this).parent().closest('td').data("value",color);
+    });
     </script>
 </body>
 </html>
