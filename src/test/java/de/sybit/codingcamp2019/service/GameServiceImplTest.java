@@ -17,8 +17,7 @@ import static de.sybit.codingcamp2019.objects.GameStateEnum.LOOSE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class GameServiceImplTest {
 
@@ -133,17 +132,16 @@ public class GameServiceImplTest {
 
    @Test
    public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
+      PinPlacement currentPlacement = mock(PinPlacement.class);
       Map<Integer, String> colors = new HashMap<>();
-      colors.put(0, "#ff0000");
-      colors.put(1, "#00ff00");
-      colors.put(2, "#0000ff");
-      colors.put(3, "#000000");
-
+      colors.put(0, "#00ff00");
+      when(currentPlacement.getColors()).thenReturn(colors);
       when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
       when(game.getAttemptCount()).thenReturn(11);
       when(game.getPinSolution()).thenReturn(pinPlacement);
-      when(pinPlacement.getColors()).thenReturn(Collections.singletonMap(1, "#ff0000"));
-      GameStateEnum gameStateEnum = gameService.checkGameStatus(session, pinPlacement);
+      when(pinPlacement.getColors()).thenReturn(Collections.singletonMap(0, "#ff0000"));
+
+      GameStateEnum gameStateEnum = gameService.checkGameStatus(session, currentPlacement);
 
       assertEquals(LOOSE, gameStateEnum);
    }
