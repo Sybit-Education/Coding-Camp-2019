@@ -11,9 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static de.sybit.codingcamp2019.objects.GameStateEnum.LOOSE;
 import static org.junit.Assert.assertEquals;
@@ -135,9 +133,16 @@ public class GameServiceImplTest {
 
    @Test
    public void checkGameStatus_attemptsReachedMaxTries_setGameStateToLoose() {
+      Map<Integer, String> colors = new HashMap<>();
+      colors.put(0, "#ff0000");
+      colors.put(1, "#00ff00");
+      colors.put(2, "#0000ff");
+      colors.put(3, "#000000");
+
       when(session.getAttribute(SessionKeys.SESSION_GAME.toString())).thenReturn(game);
       when(game.getAttemptCount()).thenReturn(11);
-
+      when(game.getPinSolution()).thenReturn(pinPlacement);
+      when(pinPlacement.getColors()).thenReturn(Collections.singletonMap(1, "#ff0000"));
       GameStateEnum gameStateEnum = gameService.checkGameStatus(session, pinPlacement);
 
       assertEquals(LOOSE, gameStateEnum);
