@@ -45,48 +45,62 @@ body {
 	height: calc(100vh - 116px);
 	margin-top: 56px;
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: 1fr auto;
 	grid-row-gap: 2%;
 }
 
-.play-ground {
+.playground-container {
 	grid-row: 1;
 	margin-top: 80px;
 	overflow-y: scroll;
 	border-bottom: 5px solid black;
+	display: grid;
+	grid-template-columns: 7.5fr 2.5fr;
 }
 
 .field-row {
+	width: 90%;
 	height: 80px;
-	margin: 0 1% 1% 0;
+	margin: 0 5% 5% 0;
 	display: grid;
-	grid-template-columns: 7.5fr 2.5fr;
-	grid-column-gap: 5%;
 }
 
-.color-pin-container {
+.play-ground {
 	grid-column: 1;
+	margin-top: 80px;
+}
+
+.feedback-container {
+	grid-column: 2;
+	margin-top: 80px;
+}
+
+
+
+.field-row {
 	background-color: rgba(255,255,255,0.5);
+	height: 80px;
+	margin-bottom: 5vh;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-
 }
 
 .color-pin {
 	width: 40px;
 	height: 40px;
 	margin: 20px auto;
+	border: 2px  solid #c3c3c3 !important;
 	border-radius: 100%;
-	background-color: black;
 
 }
 
-.feedback-container {
-	grid-column: 2;
+.feedback-pin-container {
+	height: 80px;
+	margin-bottom: 5vh;
 	background-color: rgba(255,255,255,0.5);
 	display: grid;
-	grid-template-rows: repeat(2,1fr);
-	grid-template-columns: repeat(2,1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 }
 
 .feedback-pin {
@@ -143,8 +157,11 @@ body {
 }
 
 .color-select{
+	height: 160px;
+	padding: 20px 0;
 	margin-bottom: 10px;
 	grid-row: 3;
+	border-top: 5px solid black;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	grid-template-rows: 1fr auto;
