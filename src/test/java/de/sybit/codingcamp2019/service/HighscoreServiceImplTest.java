@@ -17,10 +17,10 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-public class ScoreServiceImplTest {
+public class HighscoreServiceImplTest {
 
    @InjectMocks
-   private ScoreServiceImpl scoreService;
+   private HighscoreServiceImpl scoreService;
 
    @Mock
    private Game game;
