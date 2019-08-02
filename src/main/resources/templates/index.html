@@ -3,15 +3,19 @@
 <head th:replace="include/dependencies :: dependencies">
     <title>Coding Camp 2019</title>
 </head>
-<body>
+<body onload="on()">
 
+<div id="overlay" onclick="off()">
+    <div id="text">Mastermind</div>
+</div>
 
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
     <div class="lösung-container">
         <div th:each="i: ${#numbers.sequence(0, 3)}">
-            <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
+            <div class="lösung" th:id="'00' + ${i}"
+                 th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
     <div class="playground-container">
@@ -37,13 +41,13 @@
             </th:block>
         </table>
     </div>
-    <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
+    <form class="color-select" action="#" th:object="${pinPlacement}" method="post">
         <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
 
-                <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
-                    <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
-                            th:attr="data-color=${color.colorHex}"></option>
-                </select>
+            <select class="colorSelector" th:field="*{colors[__${entry.key}__]}">
+                <option th:each="color : ${allPossibleColors}" th:value="${color.colorHex}"
+                        th:attr="data-color=${color.colorHex}"></option>
+            </select>
         </div>
 
         <div></div>
@@ -52,9 +56,22 @@
     </form>
 
 </main>
-    <div th:replace="include/footer :: footer"></div>
+<div th:replace="include/footer :: footer"></div>
 
-    <script>
+<script>
+
+    function on() {
+
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+   }
+ </script>
+<script>
+
+
 
     $('.colorSelector').colorselector().on('change',function() {
         var color=$(this).find(':selected').attr('data-color');
@@ -72,6 +89,14 @@
                 console.log("No it didn't. This happened: ", err)
             });
     }
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
