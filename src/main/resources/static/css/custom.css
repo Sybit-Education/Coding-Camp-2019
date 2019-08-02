@@ -46,7 +46,7 @@ body {
 	margin-top: 56px;
 	display: grid;
 	grid-template-rows: 1fr auto;
-	grid-row-gap: 2%;
+	/*grid-row-gap: 2%;*/
 }
 
 .playground-container {
@@ -201,7 +201,7 @@ body {
 .lösung-container {
 	width: 100%;
 	max-width: 340px;
-	height: 70px;
+	height: 60px;
 	grid-row: 1;
 	margin: 0 auto;
 	border-radius: 0 0 10px 10px;
@@ -216,10 +216,10 @@ body {
 }
 
 .lösung{
-    border-radius: 100%;
-    width: 35px;
-    height:35px;
-
+    width: 30px;
+    height:30px;
+	border: 2px  solid #c3c3c3 !important;
+	border-radius: 100%;
 }
 
 .lösung:nth-child(1) {
