@@ -57,9 +57,8 @@ body {
 }
 
 .field-row {
-	width: 90%;
 	height: 80px;
-	margin: 0 5% 5% 0;
+	margin: 0 1% 1% 0;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
 	grid-column-gap: 5%;
@@ -88,7 +87,6 @@ body {
 	display: grid;
 	grid-template-rows: repeat(2,1fr);
 	grid-template-columns: repeat(2,1fr);
-	height: 80px;
 }
 
 .feedback-pin {
@@ -303,4 +301,22 @@ color: white;
 .red {
 color: black;
 
+}
+
+.dropdown-menu {
+	background-color:#343a40 !important;
+}
+
+.dropdown-colorselector>.dropdown-menu>li {
+	width: 40px;
+	height: 40px;
+}
+.dropdown-colorselector>.dropdown-menu>li>.color-btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 100% !important;
+	border: 2px solid #c3c3c3 !important;
+}
+.dropdown-menu.dropdown-caret:after, .dropdown-menu.dropdown-caret:before {
+	content: none;
 }
