@@ -1,12 +1,16 @@
 package de.sybit.codingcamp2019.service;
 
 import de.sybit.codingcamp2019.objects.Game;
+import de.sybit.codingcamp2019.objects.Highscore;
 import de.sybit.codingcamp2019.objects.User;
 import de.sybit.codingcamp2019.repository.HighscoreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HighscoreServiceImpl implements HighscoreService {
@@ -36,6 +40,7 @@ public class HighscoreServiceImpl implements HighscoreService {
 
       double gameSessionHighScore = 0;
       //TODO
+      List<Highscore> highscores = highscoreRepository.findAllById(new User());
 
 
       LOGGER.debug("<-- gameSessionHighScore");
