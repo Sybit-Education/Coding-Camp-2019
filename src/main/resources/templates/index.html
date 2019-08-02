@@ -5,7 +5,6 @@
 </head>
 <body>
 
-
 <div th:replace="include/navigationbar :: navigationbar"></div>
 
 <main class="container wrapper">
@@ -14,23 +13,29 @@
             <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
-    <input type="hidden" id="getColors" th:value="${correctColors}"/>
-    <input type="hidden" id="getPositions" th:value="${correctPositions}"/>
-    <input type="hidden" id="feedbackSize" th:value="${feedbackSize}"/>
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
-                <tr class="row field-row" th:each="colorObject : ${feedback}">
-                    <td class="color-pin-container">
-                        <div th:each="b : ${#numbers.sequence(0,3)}" class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
+                <tr class="row field-row" th:each="colorObject,iter : ${feedback}">
+                    <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
+                        <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
                         </div>
                     </td>
-                    <td class="feedback-container" th:each="a : ${feedbackSize}" th:id="'feedback-container-'+ ${a}">
+                </tr>
+            </th:block>
+        </table>
+        <table class="feedback-container">
+            <th:block>
+                <tr class="field-row" th:each="feedbackObject : ${feedback}">
+                    <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
+                        <div class="feedback-pin">
+                            <p><span th:text="${feedback.value[0]}"></span></p>
+                            <p><span th:text="${feedback.value[1]}"></span></p>
+                        </div>
                     </td>
                 </tr>
             </th:block>
-
         </table>
     </div>
     <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
@@ -44,19 +49,19 @@
 
         <div class="ok-btn-container">
             <!--<button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>-->
-            <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
+            <button type="submit" class="btn btn-primary ok-btn">OK</button>
         </div>
-
     </form>
 
 </main>
     <div th:replace="include/footer :: footer"></div>
 
     <script>
+        /*console.log(document.getElementsByClassName('feedback-container'))
         var attempt = document.getElementsByClassName('field-row').length;
         var numRows = $("#feedbackSize").val();
         var attempt = 0;
-        function createFbPins(row) {
+        function createFbPins() {
             var correctColors = $("#getColors").val();
             var correctPositions = $("#getPositions").val();
             console.log(numRows);
@@ -76,8 +81,7 @@
                     pinRed.classList.add('pin-red');
                 }
         }
-            createFbPins(numRows);
-            createFbPins(attempt);
+            createFbPins();*/
 
     $('.colorSelector').colorselector().on('change',function() {
     var color=$(this).find(':selected').attr('data-color');

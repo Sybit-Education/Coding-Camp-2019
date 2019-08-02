@@ -52,30 +52,33 @@ body {
 .playground-container {
 	grid-row: 1;
 	overflow: auto;
-}
-
-.play-ground {
-	margin-top: 80px;
-	width: 100%;
-}
-
-
-
-.field-row {
-	width: 90%;
-	height: 80px;
-	margin: 0 5% 5% 5%;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
 	grid-column-gap: 5%;
 }
 
-.color-pin-container {
+.play-ground {
+	grid-column: 1;
+	margin-top: 80px;
+}
+
+.feedback-container {
+	grid-column: 2;
+	margin-top: 80px;
 	background-color: rgba(255,255,255,0.5);
-	width: calc(75%);
-	height: 100%;
+}
+
+
+
+.field-row {
+	background-color: rgba(255,255,255,0.5);
+	height: 80px;
+	margin-bottom: 5%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+}
+
+.color-pin-container {
 
 }
 
@@ -85,16 +88,6 @@ body {
 	margin: 20px auto;
 	border-radius: 50%;
 
-}
-
-.feedback-container {
-	width: 20%;
-	height: 80px;
-	margin-left: 5%;
-	background-color: rgba(255,255,255,0.5);
-	display: grid;
-	grid-template-rows: repeat(2,1fr);
-	grid-template-columns: repeat(2,1fr);
 }
 
 .feedback-pin {
