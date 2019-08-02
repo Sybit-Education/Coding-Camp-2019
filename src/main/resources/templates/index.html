@@ -17,7 +17,7 @@
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
-                <tr class="row field-row" th:each="colorObject : ${feedback}">
+                <tr class="field-row" th:each="colorObject : ${feedback}">
                     <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
                         <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
