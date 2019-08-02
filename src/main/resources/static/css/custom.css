@@ -268,3 +268,10 @@ body {
 	color: black;
 	text-decoration: none;
 }
+.leaderboard {
+    font-family: Verdana;
+    color: white;
+    font-size: 21px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}

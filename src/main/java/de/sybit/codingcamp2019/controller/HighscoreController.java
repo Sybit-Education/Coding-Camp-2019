@@ -16,6 +16,9 @@ public class HighscoreController {
 
    private static final Logger LOGGER = LoggerFactory.getLogger(HighscoreController.class);
 
+
+
+
    @Autowired
    private HighscoreService highscoreService;
 
@@ -25,9 +28,12 @@ public class HighscoreController {
 
    @GetMapping("/highscore")
    public String getCurrentGameScore(Model model, HttpSession httpSession) {
+
+
       LOGGER.debug("--> getCurrentGameScore");
 
       LOGGER.debug("<-- getCurrentGameScore");
-      return "score";
+      return "Leaderboard";
    }
+
 }
