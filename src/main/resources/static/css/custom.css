@@ -51,7 +51,7 @@ body {
 
 .playground-container {
 	grid-row: 1;
-	margin-top: 80px;
+	margin-top: 62px;
 	overflow-y: scroll;
 	display: grid;
 	grid-template-columns: 7.5fr 2.5fr;
