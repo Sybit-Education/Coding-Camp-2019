@@ -60,7 +60,6 @@ public class HomeController {
       addColorPosition(pinPlacement, responseObject);
       modelAndView.addObject("allPossibleColors", colorService.getAllPossibleColorsForPicker());
       modelAndView.addObject("feedback", rowObjectList);
-      modelAndView.addObject("feedbackSize", rowObjectList.size());
 
       GameStateEnum gameState = gameService.checkGameStatus(session, pinPlacement);
       if (gameState.equals(PLAYING)) {

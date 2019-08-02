@@ -17,7 +17,7 @@
     <div class="playground-container">
         <table class="play-ground">
             <th:block>
-                <tr class="row field-row" th:each="colorObject,iter : ${feedback}">
+                <tr class="row field-row" th:each="colorObject : ${feedback}">
                     <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
                         <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
@@ -55,31 +55,6 @@
     <div th:replace="include/footer :: footer"></div>
 
     <script>
-        /*console.log(document.getElementsByClassName('feedback-container'))
-        var attempt = document.getElementsByClassName('field-row').length;
-        var numRows = $("#feedbackSize").val();
-        var attempt = 0;
-        function createFbPins() {
-            var correctColors = $("#getColors").val();
-            var correctPositions = $("#getPositions").val();
-            console.log(numRows);
-            console.log(correctColors,correctPositions);
-            var FbContainer = document.getElementById(`feedback-container-${numRows}`);
-            console.log(FbContainer);
-                for(let i = 0; i< correctColors; i++) {
-                    let pin = document.createElement('div');
-                    FbContainer.appendChild(pin);
-                    pin.classList.add('feedback-pin');
-
-            }
-            for (let j = 0;j<correctPositions; j++) {
-                let pinRed = document.createElement('div');
-                FbContainer.appendChild(pinRed);
-                pinRed.classList.add('feedback-pin');
-                pinRed.classList.add('pin-red');
-            }
-        }
-            createFbPins(attempt);*/
 
     $('.colorSelector').colorselector().on('change',function() {
         var color=$(this).find(':selected').attr('data-color');
