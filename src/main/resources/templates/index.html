@@ -28,10 +28,20 @@
         </table>
         <table class="feedback-container">
             <th:block>
-                <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
-                    <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
-                        <p>Position: <span th:text="${feedback.value[0]}"></span></p>
-                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>
+                <tr th:each="feedbackObject : ${feedback}">
+                    <td th:each="feedback : ${feedbackObject.getFeedback()}">
+                        <div class="feedback-pin-container" th:if="${feedback.value[0] == 0} or ${feedback.value[1] == 0}">
+                        </div>
+                        <div class="feedback-pin-container" th:unless="${feedback.value[0] == 0} or ${feedback.value[1] == 0}">
+                            <div th:each="p : ${#numbers.sequence(0, feedback.value[0])}">
+                                <div class="feedback-pin pin-red"></div>
+                            </div>
+                            <div th:each="p : ${#numbers.sequence(0, feedback.value[1])}">
+                                <div class="feedback-pin"></div>
+                            </div>
+                        </div>
+                        <!--<p>Position: <span th:text="${feedback.value[0]}"></span></p>
+                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>-->
                     </td>
                 </tr>
             </th:block>
@@ -55,6 +65,29 @@
     <div th:replace="include/footer :: footer"></div>
 
     <script>
+        /*var rows = document.getElementsByClassName('feedback-pin-container');
+        var numRows = rows.length -1;
+        function createFbPins() {
+            var correctColors = $("#getColors").val();
+            var correctPositions = $("#getPositions").val();
+            var container = rows[numRows];
+            console.log(container, numRows);
+            console.log(correctColors,correctPositions);
+                for(let i = 0; i< correctColors; i++) {
+                    let pin = document.createElement('div');
+                    container.appendChild(pin);
+                    pin.classList.add('feedback-pin');
+
+            }
+            for (let j = 0;j<correctPositions; j++) {
+                let pinRed = document.createElement('div');
+                container.appendChild(pinRed);
+                pinRed.classList.add('feedback-pin');
+                pinRed.classList.add('pin-red');
+            }
+        }
+        createFbPins();*/
+
 
     $('.colorSelector').colorselector().on('change',function() {
         var color=$(this).find(':selected').attr('data-color');
