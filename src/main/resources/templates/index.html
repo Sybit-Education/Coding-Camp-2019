@@ -14,21 +14,28 @@
             <div class="lösung" th:id="'00' + ${i}" th:style="${solution} ? 'background:' + ${solution.getColors()[__${i}__]}"></div>
         </div>
     </div>
-    <div class="play-ground">
+    <div class="playground-container">
+        <table class="play-ground">
+            <th:block>
+                <tr class="row field-row" th:each="colorObject : ${feedback}">
+                    <td th:each="b : ${#numbers.sequence(0,3)}" class="color-pin-container">
+                        <div class="color-pin" th:style="'background: ' + ${colorObject.getColorPos()[__${b}__]}">
 
-        <div th:each="i: ${#numbers.sequence(0, 11)}">
-            <div class="field-row" id="'row' + ${i}">
-                <div class="color-pin-container">
-                    <div th:each="i: ${#numbers.sequence(0, 3)}">
-                    </div>
-                </div>
-                <input type="hidden" th:value="${correctColors}" id="getColors"/>
-                <input type="hidden" th:value="${correctPositions}" id="getPositions"/>
-                <div class="feedback-container" th:id="'feedback-container-' +${i}">
-
-                </div>
-            </div>
-        </div>
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <table class="feedback-container">
+            <th:block>
+                <tr class="feedback-pin-container" th:each="feedbackObject : ${feedback}">
+                    <td class="feed-container" th:each="feedback : ${feedbackObject.getFeedback()}">
+                        <p>Position: <span th:text="${feedback.value[0]}"></span></p>
+                        <p>Farben: <span th:text="${feedback.value[1]}"></span></p>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
     </div>
     <form class="color-select" action="#" th:object="${pinPlacement}" method="post" >
         <div th:each="entry, entryStat: *{colors}" id="selection-container" class="selected-color" th:id="${i}">
@@ -39,41 +46,32 @@
                 </select>
         </div>
 
-
+        <div></div>
         <button type="submit" class="btn btn-primary ok-btn" th:disabled="${buttonDisable}">OK</button>
 
     </form>
 
 </main>
     <div th:replace="include/footer :: footer"></div>
+
     <script>
-        var attempt = 0;
-        function createFbPins(row) {
-            var correctColors = $("#getColors").val();
-            var correctPositions = $("#getPositions").val();
-            console.log(correctColors,correctPositions)
-
-            let FbContainer = document.getElementById(`feedback-container-${row}`);
-            for(let i = 0; i< correctColors; i++) {
-                let pin = document.createElement('div');
-                FbContainer.appendChild(pin);
-                pin.classList.add('feedback-pin');
-
-            }
-            for (let j = 0;j<correctPositions; j++) {
-                let pinRed = document.createElement('div');
-                FbContainer.appendChild(pinRed);
-                pinRed.classList.add('feedback-pin');
-                pinRed.classList.add('pin-red');
-            }
-        }
-            createFbPins(attempt);
 
     $('.colorSelector').colorselector().on('change',function() {
-    var color=$(this).find(':selected').attr('data-color');
-    $(this).parent().closest('td').css('background', color);
-    $(this).parent().closest('td').data("value",color);
+        var color=$(this).find(':selected').attr('data-color');
+        $(this).parent().closest('td').css('background', color);
+        $(this).parent().closest('td').data("value",color);
     });
-    </script>
+
+    //register service worker
+    if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(function(reg){
+                console.log("Yes, it did.");
+            }).catch(function(err) {
+                console.log("No it didn't. This happened: ", err)
+            });
+    }
+</script>
 </body>
 </html>
